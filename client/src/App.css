@@ -1,0 +1,175 @@
+/* App.css */
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+/* 新增：确保WebGazer的canvas可见 */
+#webgazerVideoContainer,
+#webgazerPredictorVisuals {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 9999 !important;
+  pointer-events: none !important;
+}
+
+.app-container {
+  font-family: sans-serif;
+  text-align: center;
+  display: flex; /* 使用flex布局 */
+  position: relative; /* 新增：为WebGazer canvas定位提供参考 */
+  min-height: 100vh; /* 确保容器占满视口 */
+}
+
+.main-content {
+  flex: 1; /* 新增：主内容区自动扩展 */
+  max-width: 1200px; /* 设置容器最大宽度 */
+  margin: 0 auto; /* 水平居中 */
+}
+
+.sidebar {
+  width: 300px; /* 固定宽度 */
+  padding: 20px;
+  background-color: #f8f8f8; /* 可选背景色 */
+  border-left: 1px solid #ccc; /* 边界线 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.images-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4列布局 */
+  gap: 10px; /* 容器之间的间距 */
+  max-width: 1200px; /* 设置容器最大宽度 */
+  margin: 0 auto; /* 水平居中 */
+  padding: 10px; /* 添加内边距 */
+  box-sizing: border-box; /* 确保padding不影响宽度计算 */
+}
+
+.image-item {
+  width: 90%;
+  max-width: 100%; /* 防止溢出 */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: visible;
+  padding: 10px;
+  position: relative; /* 添加相对定位 */
+
+}
+
+.svg-object {
+  width: 80%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+
+}
+
+.image-item .content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* 新增选中状态样式 */
+.image-item.selected {
+  border: 5px solid rgba(19, 19, 19, 0.49); /* 亮红色边框 */
+  box-shadow: 0 0 8px rgba(136, 136, 136, 0.3); /* 红色阴影 */
+  z-index: 1; /* 提高层级 */
+}
+
+.image-item.selected::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(100, 99, 99, 0.2);
+  z-index: -1;
+}
+
+
+/* 新增上一批次精英状态样式 */
+.image-item.elite {
+  border: 5px solid rgba(19, 19, 19, 0.49); /* 亮边框 */
+  box-shadow: 0 0 8px rgba(136, 136, 136, 0.3); /* 红色阴影 */
+  /*background-color: rgba(44, 43, 43, 0.13);*/
+  z-index: 0; /* 低于 selected */
+}
+
+/* 移除原评分滑动条样式（如果有残留） */
+.image-item .rating-slider {
+  display: none; /* 隐藏评分滑动条 */
+}
+
+.image-item .rating-slider label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.image-item .rating-slider input[type="range"] {
+  width: 100%;
+}
+
+/* button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+} */
+
+button {
+  margin-top: auto;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 24px;
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.calibration-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.calibration-report {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: inline-block;
+  text-align: left;
+}
+
+.calibration-report h3 {
+  margin-top: 0;
+}
+
+.calibration-report p {
+  margin-bottom: 0.5em;
+}
+
+.image-item .rating-slider label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.image-item .rating-slider input[type="range"] {
+  width: 100%;
+}
