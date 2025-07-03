@@ -11,7 +11,7 @@ def init_population(num_genes, population_size):
 previous_elite_solutions = [] # 存储历史精英方案
 
 # 用户评分反馈 & 迭代新一代___目前采用的是一种混合精英选择方法___
-def evolve_population(gaze_records, selected_indices,current_population):
+def evolve_population(ratings, gaze_records, selected_indices,current_population):
     from IGA import crossover, mutation,sigmoid_selection
     #from Gaze_Graph import attention_rank, build_graph
     global attention_scores,new_population, previous_elite_solutions
@@ -24,7 +24,7 @@ def evolve_population(gaze_records, selected_indices,current_population):
     # 0.2. 在attention_rank的scores基础上定义评分函数
     def fitness_func(ga_instance, solution, solution_idx):
 
-        return attention_scores.get(solution_idx, 0.0)
+        return ratings[solution_idx]
 
     # 0.3.生成符合要求的精英位置逻辑！=[1,4] ---
     def generate_valid_positions(num, total):

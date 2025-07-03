@@ -407,6 +407,7 @@ function App() {
         const jpgUrls = data.jpg_base64.map(base64Jpg => `data:image/png;base64,${base64Jpg}`);
         setSvgImages(jpgUrls);
         setCurrentPopulation(data.population);
+        setRatings(Array(16).fill(0));//初始化评分为0
       } else {
         console.error('响应数据中缺少必要字段');
       }
@@ -465,6 +466,7 @@ function App() {
         setSvgImages(jpgUrls);
         setGazeRecords([]); // 清空注视记录
         prevContainerIndexRef.current = null; // 重置注视容器索引
+        setRatings(Array(16).fill(0));//归0
         setGazeTimes(Array(16).fill(0)); // 重置注视时间
         setCurrentPopulation(data.new_population);
         setElitePositions(data.elite_positions || []); // 保存精英位置
@@ -532,7 +534,7 @@ function App() {
       </div>
 
       <div className="main-content">
-        
+
         <div className="images-container">
         {svgImages.map((imageUrl, index) => (
           <div 
@@ -556,7 +558,7 @@ function App() {
               </div>
             </div>
             
-            {/* 滑动条移到图片容器内部 */}
+            {/* 滑动条在图片容器底部 */}
             <div className="rating-wrapper">
               <div className="rating-container">
                 <span>1</span>
@@ -564,10 +566,11 @@ function App() {
                   type="range" 
                   min="1" 
                   max="5" 
-                  value={ratings[index] || 3} 
+                  value={ratings[index] || 0} 
                   onChange={(e) => handleRatingChange(index, parseInt(e.target.value))}
                   onClick={(e) => e.stopPropagation()}
-                  className="rating-slider"
+                  //className="rating-slider"
+                  className={`rating-slider ${ratings[index] > 0 ? 'green-slider' : ''}`}
                 />
                 <span>5</span>
               </div>

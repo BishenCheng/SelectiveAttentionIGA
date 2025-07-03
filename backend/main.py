@@ -149,6 +149,7 @@ async def evolve_population_route(request: UserScoresRequest):  # 使用新的�
     current_population = request.population
     gaze_records = request.gaze_records  # 获取注视记录
     selected_indices = request.selected_indices  # 获取选中索引
+    ratings= request.ratings
 
     # ---------------- 新增：保存 本地的JSON 备份 ----------------
     # 创建存储目录（如果不存在）
@@ -171,6 +172,7 @@ async def evolve_population_route(request: UserScoresRequest):  # 使用新的�
 
     # 遗传算法逻辑
     new_population, elite_positions  = evolve_population(
+        ratings=ratings,
         gaze_records=gaze_records,  # 传递注视记录
         selected_indices=selected_indices,  # 将选中索引作为精英保留
         current_population=current_population

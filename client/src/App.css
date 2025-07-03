@@ -233,10 +233,23 @@ button {
   -webkit-appearance: none;
   height: 6px;
   border-radius: 5px;
-  background: #ddd;
+  background: #eee;
   outline: none;
   pointer-events: auto;
   z-index: 3;
+  
+}
+
+.rating-slider.green-slider {
+  background: #e7ffe7; /* 绿色背景 */
+}
+
+.rating-slider.green-slider::-webkit-slider-thumb {
+  background: #919191; /* 更深的绿色 */
+}
+
+.rating-slider.green-slider::-moz-range-thumb {
+  background: #919191; /* 更深的绿色 */
 }
 
 .rating-slider::-webkit-slider-thumb {
@@ -245,7 +258,7 @@ button {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #4CAF50;
+  background: #e7ffe7;
   cursor: pointer;
   -webkit-transition: background 0.3s ease;
   transition: background 0.3s ease;
