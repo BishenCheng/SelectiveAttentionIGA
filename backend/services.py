@@ -13,13 +13,13 @@ previous_elite_solutions = [] # 存储历史精英方案
 # 用户评分反馈 & 迭代新一代___目前采用的是一种混合精英选择方法___
 def evolve_population(gaze_records, selected_indices,current_population):
     from IGA import crossover, mutation,sigmoid_selection
-    from Gaze_Graph import attention_rank, build_graph
+    #from Gaze_Graph import attention_rank, build_graph
     global attention_scores,new_population, previous_elite_solutions
 
     # 0.1. 计算注意力分数
     # G = build_graph(gaze_records)
-    G = build_graph(gaze_records)  # 构造字典结构
-    attention_scores = attention_rank(G,current_population,alpha_post=0.7, alpha_pre=0.7, beta_factor=1.0, max_iter=10, tol=1e-6)
+    # G = build_graph(gaze_records)  # 构造字典结构
+    # attention_scores = attention_rank(G,current_population,alpha_post=0.7, alpha_pre=0.7, beta_factor=1.0, max_iter=10, tol=1e-6)
 
     # 0.2. 在attention_rank的scores基础上定义评分函数
     def fitness_func(ga_instance, solution, solution_idx):
@@ -58,7 +58,7 @@ def evolve_population(gaze_records, selected_indices,current_population):
         initial_population=current_population,
         num_genes=32,
         fitness_func = fitness_func,
-        parent_selection_type="rank", # 后续改用sigmoid选择.
+        parent_selection_type="rank", 
         mutation_type=mutation,# 后续修改一下
         crossover_type=crossover,
         crossover_probability=crossover_probability,
@@ -112,17 +112,6 @@ def evolve_population(gaze_records, selected_indices,current_population):
                 return set(tuple(ind) for ind in generation)
 
 
-            # 计算集合余弦距离
-            def calculate_cosine_distances(gens):
-                distances = []
-                for i in range(len(gens)-1):
-                    for j in range(i+1, len(gens)):
-                        # 假设每个gen是一个个体的列表，这里取第一个个体进行比较
-                        genA = gens[i][0] if isinstance(gens[i], list) else next(iter(gens[i]))
-                        genB = gens[j][0] if isinstance(gens[j], list) else next(iter(gens[j]))
-                        dist = cosine_distance(genA, genB)
-                        distances.append(dist)
-                return distances
 
             set1 = to_set(gen1)
             set2 = to_set(gen2)
@@ -135,14 +124,14 @@ def evolve_population(gaze_records, selected_indices,current_population):
 
             # 认知收敛条件2
             # 三代内任意两个方案的余弦距离 < 0.1
-            all_gens = [gen1, gen2, gen3]
-            for gen in all_gens:
-                # 确保每个世代至少有一个方案可以与其他世代比较
-                if len(gen) > 0:
-                    distances = calculate_cosine_distances(all_gens)
-                    if all(d < 0.1 for d in distances):
-                        print("✅ 实验终止条件满足：连续三代内发生的修改的余弦距离小于0.1")
-                        return [], elite_positions
+            # all_gens = [gen1, gen2, gen3]
+            # for gen in all_gens:
+            #     # 确保每个世代至少有一个方案可以与其他世代比较
+            #     if len(gen) > 0:
+            #         distances = calculate_cosine_distances(all_gens)
+            #         if all(d < 0.1 for d in distances):
+            #             print("✅ 实验终止条件满足：连续三代内发生的修改的余弦距离小于0.1")
+            #             return [], elite_positions
 
     return new_population, elite_positions
 

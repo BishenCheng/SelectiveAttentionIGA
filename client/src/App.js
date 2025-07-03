@@ -22,10 +22,21 @@ function App() {
   const[EchoMessage,setEchoMessage] = useState(false);//新增：提醒用户去浏览选择
 
   const [initializeClickCount, setInitializeClickCount] = useState(0); // 新增：记录初始化按钮点击次数
+  // A版
+  // 新增初始化 ratings 状态，确保长度为16，初始值为3
+  const [ratings, setRatings] = useState(Array(16).fill(3)); // 修改此处
+
 
   // 加载indexDB 跨域通信机制。接听3001端口的消息。
   const [dbdata, setData] = useState(null);
   const [writeStatus, setWriteStatus] = useState('');
+
+  // 新增 handleRatingChange 函数
+  const handleRatingChange = (index, value) => {
+    const newRatings = [...ratings];
+    newRatings[index] = value;
+    setRatings(newRatings);
+  };
 
   // 打开 3001 页面并发送请求
   const handleGetDataAndWrite = () => {
@@ -336,6 +347,7 @@ function App() {
 
 
   const handleContainerClick = (index) => {
+
     // 使用函数式更新确保获取最新状态
     setSelectedIndices(prev => {
       const newSelected = new Set(prev); // 基于最新状态创建新Set
@@ -438,7 +450,8 @@ function App() {
         body: JSON.stringify({
           population: currentPopulation,
           gaze_records: finalRecords, // 传递注视记录
-          selected_indices: Array.from(selectedIndices) // 传递选中索引
+          selected_indices: Array.from(selectedIndices), // 传递选中索引
+          ratings: ratings.map(r => r || 0) // 默认0防止undefined
         }),
       });
       if (!response.ok) {
@@ -519,33 +532,53 @@ function App() {
       </div>
 
       <div className="main-content">
-      <div className="images-container">
+        
+        <div className="images-container">
         {svgImages.map((imageUrl, index) => (
-          <div
+          <div 
             key={index}
-            // className={`image-item ${selectedIndices.has(index) ? 'selected' : ''}`}
-            className={`image-item ${selectedIndices.has(index) ? 'selected' : ''} ${elitePositions.includes(index) ? 'elite' : ''}`}
-            ref={containerRefs.current[index]}
-            onClick={() => handleContainerClick(index)}
+            className="image-item-container"  // 新增统一容器类名
           >
-            <div className="content-wrapper">
-              {imageUrl && (
-                  <img
-                      src={imageUrl}
-                      alt={`Vase ${index}`}
-                      className="image-content"
-                      style={{ pointerEvents: 'none' }}
-                      onLoad={() => {
-                        // 可在此处添加日志验证尺寸是否正确
-                        // console.log('图片加载完成，容器尺寸：', containerRefs.current[index].current.getBoundingClientRect());
-                      }}
-                  />
-              )}
-              {/* <p>注视时间: {gazeTimes[index].toFixed(2)} ms</p> */}
+            <div
+              className={`image-item ${selectedIndices.has(index) ? 'selected' : ''} ${elitePositions.includes(index) ? 'elite' : ''}`}
+              ref={containerRefs.current[index]}
+              onClick={() => handleContainerClick(index)}
+            >
+              <div className="content-wrapper">
+                {imageUrl && (
+                    <img
+                        src={imageUrl}
+                        alt={`Vase ${index}`}
+                        className="image-content"
+                        style={{ pointerEvents: 'none' }}
+                    />
+                )}
+              </div>
+            </div>
+            
+            {/* 滑动条移到图片容器内部 */}
+            <div className="rating-wrapper">
+              <div className="rating-container">
+                <span>1</span>
+                <input 
+                  type="range" 
+                  min="1" 
+                  max="5" 
+                  value={ratings[index] || 3} 
+                  onChange={(e) => handleRatingChange(index, parseInt(e.target.value))}
+                  onClick={(e) => e.stopPropagation()}
+                  className="rating-slider"
+                />
+                <span>5</span>
+              </div>
             </div>
           </div>
         ))}
       </div>
+      
+
+      
+      
       </div>
     </div>
   );

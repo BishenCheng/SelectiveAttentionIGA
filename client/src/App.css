@@ -63,6 +63,7 @@ body, html {
   overflow: visible;
   padding: 10px;
   position: relative; /* 添加相对定位 */
+  pointer-events: auto;/* 新增：允许子元素的点击事件穿透 */
 
 }
 
@@ -172,4 +173,104 @@ button {
 
 .image-item .rating-slider input[type="range"] {
   width: 100%;
+}
+
+.images-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 保持4列布局 */
+  gap: 10px; /* 保持间距 */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* 新增统一容器样式 */
+.image-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 5px; /* 保持内边距 */
+  box-sizing: border-box;
+}
+
+.image-item {
+  width: 100%; /* 占满容器宽度 */
+  max-width: 100%; /* 防止溢出 */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: visible;
+  padding: 10px;
+  position: relative;
+  pointer-events: auto;
+}
+
+/* 调整评分容器样式 */
+.rating-wrapper {
+  width: 100%; /* 占满图片容器宽度 */
+  margin-top: 8px; /* 与图片的间距 */
+  padding: 0 5px; /* 内边距 */
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* 保持原有滑动条样式不变 */
+.rating-slider {
+  flex: 1;
+  margin: 0 10px;
+  -webkit-appearance: none;
+  height: 6px;
+  border-radius: 5px;
+  background: #ddd;
+  outline: none;
+  pointer-events: auto;
+  z-index: 3;
+}
+
+.rating-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+  -webkit-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+
+.rating-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+  -moz-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+
+.rating-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background: #ddd;
+  border-radius: 5px;
+}
+
+.rating-slider::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  background: #ddd;
+  border-radius: 5px;
 }
