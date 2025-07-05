@@ -11,7 +11,7 @@ import json  # 用于 JSON 操作
 # 新增：导入异步处理模块
 import asyncio
 from concurrent.futures import ProcessPoolExecutor
-import functools
+#import functools
 
 
 # 启动方式：uvicorn main:app --reload --host 127.0.0.1 --port 8000

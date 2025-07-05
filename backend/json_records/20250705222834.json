@@ -1,0 +1,1741 @@
+{
+  "population": [
+    [
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1
+    ]
+  ],
+  "gaze_records": [
+    {
+      "timestamp": "2025-07-05T14:12:13.578Z",
+      "source_container": 12,
+      "target_container": 12,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:13.740Z",
+      "source_container": 12,
+      "target_container": 8,
+      "duration_weight": 326.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:14.892Z",
+      "source_container": 8,
+      "target_container": 12,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:15.061Z",
+      "source_container": 12,
+      "target_container": 8,
+      "duration_weight": 164.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:15.225Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:12:15.387Z",
+      "source_container": 9,
+      "target_container": 5,
+      "duration_weight": 329.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:12:16.041Z",
+      "source_container": 5,
+      "target_container": 4,
+      "duration_weight": 327.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:19.015Z",
+      "source_container": 4,
+      "target_container": 8,
+      "duration_weight": 486.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:21.466Z",
+      "source_container": 8,
+      "target_container": 4,
+      "duration_weight": 502.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:23.931Z",
+      "source_container": 4,
+      "target_container": 8,
+      "duration_weight": 166.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:24.263Z",
+      "source_container": 8,
+      "target_container": 2,
+      "duration_weight": 160.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:24.423Z",
+      "source_container": 2,
+      "target_container": 3,
+      "duration_weight": 166.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:24.916Z",
+      "source_container": 3,
+      "target_container": 7,
+      "duration_weight": 163.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:25.573Z",
+      "source_container": 7,
+      "target_container": 6,
+      "duration_weight": 332.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:25.905Z",
+      "source_container": 6,
+      "target_container": 9,
+      "duration_weight": 166.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:12:26.071Z",
+      "source_container": 9,
+      "target_container": 13,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:26.237Z",
+      "source_container": 13,
+      "target_container": 12,
+      "duration_weight": 324.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:28.017Z",
+      "source_container": 12,
+      "target_container": 8,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:28.167Z",
+      "source_container": 8,
+      "target_container": 4,
+      "duration_weight": 26211.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:54.378Z",
+      "source_container": 4,
+      "target_container": 5,
+      "duration_weight": 172.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:12:54.718Z",
+      "source_container": 5,
+      "target_container": 4,
+      "duration_weight": 168.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:56.229Z",
+      "source_container": 4,
+      "target_container": 12,
+      "duration_weight": 494.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:56.888Z",
+      "source_container": 12,
+      "target_container": 8,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:57.057Z",
+      "source_container": 8,
+      "target_container": 4,
+      "duration_weight": 164.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:57.393Z",
+      "source_container": 4,
+      "target_container": 1,
+      "duration_weight": 169.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:57.562Z",
+      "source_container": 1,
+      "target_container": 2,
+      "duration_weight": 166.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:57.728Z",
+      "source_container": 2,
+      "target_container": 5,
+      "duration_weight": 165.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:12:58.056Z",
+      "source_container": 5,
+      "target_container": 3,
+      "duration_weight": 167.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:59.055Z",
+      "source_container": 3,
+      "target_container": 5,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:12:59.221Z",
+      "source_container": 5,
+      "target_container": 4,
+      "duration_weight": 164.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:12:59.385Z",
+      "source_container": 4,
+      "target_container": 8,
+      "duration_weight": 164.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:13:02.003Z",
+      "source_container": 8,
+      "target_container": 5,
+      "duration_weight": 147.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:13:02.318Z",
+      "source_container": 5,
+      "target_container": 9,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:13:02.467Z",
+      "source_container": 9,
+      "target_container": 8,
+      "duration_weight": 173.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:13:02.640Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 322.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:13:02.962Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 160.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:13:03.454Z",
+      "source_container": 10,
+      "target_container": 5,
+      "duration_weight": 152.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:13:03.606Z",
+      "source_container": 5,
+      "target_container": 6,
+      "duration_weight": 176.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:13:04.444Z",
+      "source_container": 6,
+      "target_container": 7,
+      "duration_weight": 328.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:13:04.937Z",
+      "source_container": 7,
+      "target_container": 6,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:13:05.264Z",
+      "source_container": 6,
+      "target_container": 2,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:13:05.592Z",
+      "source_container": 2,
+      "target_container": 1,
+      "duration_weight": 330.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:13:05.922Z",
+      "source_container": 1,
+      "target_container": 5,
+      "duration_weight": 325.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:13:06.573Z",
+      "source_container": 5,
+      "target_container": 8,
+      "duration_weight": 181.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:16:29.297Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:16:29.461Z",
+      "source_container": 9,
+      "target_container": 5,
+      "duration_weight": 163.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:16:29.624Z",
+      "source_container": 5,
+      "target_container": 6,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:16:29.786Z",
+      "source_container": 6,
+      "target_container": 5,
+      "duration_weight": 179.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:16:29.965Z",
+      "source_container": 5,
+      "target_container": 6,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:16:30.133Z",
+      "source_container": 6,
+      "target_container": 2,
+      "duration_weight": 1168.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:16:31.301Z",
+      "source_container": 2,
+      "target_container": 3,
+      "duration_weight": 167.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:16:31.966Z",
+      "source_container": 3,
+      "target_container": 6,
+      "duration_weight": 325.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:16:32.291Z",
+      "source_container": 6,
+      "target_container": 9,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:16:32.615Z",
+      "source_container": 9,
+      "target_container": 5,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:16:32.934Z",
+      "source_container": 5,
+      "target_container": 4,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:16:33.244Z",
+      "source_container": 4,
+      "target_container": 0,
+      "duration_weight": 155.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:16:33.399Z",
+      "source_container": 0,
+      "target_container": 4,
+      "duration_weight": 157.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:41.597Z",
+      "source_container": 4,
+      "target_container": 12,
+      "duration_weight": 159.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:41.905Z",
+      "source_container": 12,
+      "target_container": 8,
+      "duration_weight": 305.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:45.434Z",
+      "source_container": 8,
+      "target_container": 4,
+      "duration_weight": 153.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:45.587Z",
+      "source_container": 4,
+      "target_container": 5,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:19:45.741Z",
+      "source_container": 5,
+      "target_container": 1,
+      "duration_weight": 142.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:45.883Z",
+      "source_container": 1,
+      "target_container": 2,
+      "duration_weight": 165.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:46.202Z",
+      "source_container": 2,
+      "target_container": 3,
+      "duration_weight": 156.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:46.672Z",
+      "source_container": 3,
+      "target_container": 7,
+      "duration_weight": 145.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:46.984Z",
+      "source_container": 7,
+      "target_container": 9,
+      "duration_weight": 316.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:19:47.782Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 317.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:48.257Z",
+      "source_container": 10,
+      "target_container": 7,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:48.557Z",
+      "source_container": 7,
+      "target_container": 6,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:48.719Z",
+      "source_container": 6,
+      "target_container": 2,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:49.025Z",
+      "source_container": 2,
+      "target_container": 1,
+      "duration_weight": 149.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:49.174Z",
+      "source_container": 1,
+      "target_container": 4,
+      "duration_weight": 151.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:51.006Z",
+      "source_container": 4,
+      "target_container": 5,
+      "duration_weight": 157.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:19:51.163Z",
+      "source_container": 5,
+      "target_container": 7,
+      "duration_weight": 159.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:52.117Z",
+      "source_container": 7,
+      "target_container": 11,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:52.273Z",
+      "source_container": 11,
+      "target_container": 9,
+      "duration_weight": 156.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:19:52.429Z",
+      "source_container": 9,
+      "target_container": 13,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:52.587Z",
+      "source_container": 13,
+      "target_container": 12,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:52.740Z",
+      "source_container": 12,
+      "target_container": 9,
+      "duration_weight": 153.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:19:52.893Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 296.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:53.189Z",
+      "source_container": 10,
+      "target_container": 11,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:53.350Z",
+      "source_container": 11,
+      "target_container": 10,
+      "duration_weight": 139.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:53.489Z",
+      "source_container": 10,
+      "target_container": 13,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:53.788Z",
+      "source_container": 13,
+      "target_container": 12,
+      "duration_weight": 163.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:19:54.257Z",
+      "source_container": 12,
+      "target_container": 9,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:19:54.396Z",
+      "source_container": 9,
+      "target_container": 8,
+      "duration_weight": 160.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:20:00.681Z",
+      "source_container": 8,
+      "target_container": 12,
+      "duration_weight": 161.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:20:02.940Z",
+      "source_container": 12,
+      "target_container": 8,
+      "duration_weight": 599.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:20:03.539Z",
+      "source_container": 8,
+      "target_container": 13,
+      "duration_weight": 302.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:20:03.998Z",
+      "source_container": 13,
+      "target_container": 12,
+      "duration_weight": 158.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:04.446Z",
+      "source_container": 12,
+      "target_container": 8,
+      "duration_weight": 160.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:07.275Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:07.433Z",
+      "source_container": 9,
+      "target_container": 5,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:07.589Z",
+      "source_container": 5,
+      "target_container": 2,
+      "duration_weight": 471.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:08.060Z",
+      "source_container": 2,
+      "target_container": 6,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:08.368Z",
+      "source_container": 6,
+      "target_container": 1,
+      "duration_weight": 456.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:08.824Z",
+      "source_container": 1,
+      "target_container": 4,
+      "duration_weight": 156.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:09.295Z",
+      "source_container": 4,
+      "target_container": 5,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:09.599Z",
+      "source_container": 5,
+      "target_container": 4,
+      "duration_weight": 153.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:10.369Z",
+      "source_container": 4,
+      "target_container": 8,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:10.682Z",
+      "source_container": 8,
+      "target_container": 4,
+      "duration_weight": 142.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:16.023Z",
+      "source_container": 4,
+      "target_container": 2,
+      "duration_weight": 161.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:16.184Z",
+      "source_container": 2,
+      "target_container": 3,
+      "duration_weight": 943.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:17.428Z",
+      "source_container": 3,
+      "target_container": 6,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:17.595Z",
+      "source_container": 6,
+      "target_container": 5,
+      "duration_weight": 315.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:18.083Z",
+      "source_container": 5,
+      "target_container": 8,
+      "duration_weight": 602.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:24.273Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 163.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:24.436Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 300.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:25.042Z",
+      "source_container": 10,
+      "target_container": 9,
+      "duration_weight": 306.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:25.348Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:25.651Z",
+      "source_container": 10,
+      "target_container": 6,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:26.099Z",
+      "source_container": 6,
+      "target_container": 1,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:26.260Z",
+      "source_container": 1,
+      "target_container": 0,
+      "duration_weight": 307.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:26.567Z",
+      "source_container": 0,
+      "target_container": 1,
+      "duration_weight": 142.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:27.179Z",
+      "source_container": 1,
+      "target_container": 6,
+      "duration_weight": 156.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:27.335Z",
+      "source_container": 6,
+      "target_container": 7,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:27.491Z",
+      "source_container": 7,
+      "target_container": 6,
+      "duration_weight": 313.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:27.804Z",
+      "source_container": 6,
+      "target_container": 10,
+      "duration_weight": 165.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:27.969Z",
+      "source_container": 10,
+      "target_container": 14,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:28.124Z",
+      "source_container": 14,
+      "target_container": 9,
+      "duration_weight": 155.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:28.432Z",
+      "source_container": 9,
+      "target_container": 5,
+      "duration_weight": 306.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:28.738Z",
+      "source_container": 5,
+      "target_container": 6,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:29.029Z",
+      "source_container": 6,
+      "target_container": 5,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:29.187Z",
+      "source_container": 5,
+      "target_container": 4,
+      "duration_weight": 300.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:30.252Z",
+      "source_container": 4,
+      "target_container": 8,
+      "duration_weight": 181.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:31.216Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 153.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:31.369Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:31.678Z",
+      "source_container": 10,
+      "target_container": 9,
+      "duration_weight": 309.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:32.297Z",
+      "source_container": 9,
+      "target_container": 1,
+      "duration_weight": 471.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:32.924Z",
+      "source_container": 1,
+      "target_container": 2,
+      "duration_weight": 159.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:33.083Z",
+      "source_container": 2,
+      "target_container": 3,
+      "duration_weight": 155.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:33.392Z",
+      "source_container": 3,
+      "target_container": 2,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:33.691Z",
+      "source_container": 2,
+      "target_container": 1,
+      "duration_weight": 163.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:33.854Z",
+      "source_container": 1,
+      "target_container": 5,
+      "duration_weight": 462.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:34.470Z",
+      "source_container": 5,
+      "target_container": 9,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:34.623Z",
+      "source_container": 9,
+      "target_container": 8,
+      "duration_weight": 154.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:34.930Z",
+      "source_container": 8,
+      "target_container": 5,
+      "duration_weight": 157.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:35.087Z",
+      "source_container": 5,
+      "target_container": 8,
+      "duration_weight": 155.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:35.396Z",
+      "source_container": 8,
+      "target_container": 5,
+      "duration_weight": 950.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:36.518Z",
+      "source_container": 5,
+      "target_container": 1,
+      "duration_weight": 159.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:36.835Z",
+      "source_container": 1,
+      "target_container": 6,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:37.157Z",
+      "source_container": 6,
+      "target_container": 5,
+      "duration_weight": 155.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:37.476Z",
+      "source_container": 5,
+      "target_container": 1,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:37.792Z",
+      "source_container": 1,
+      "target_container": 0,
+      "duration_weight": 165.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:37.957Z",
+      "source_container": 0,
+      "target_container": 1,
+      "duration_weight": 156.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:38.113Z",
+      "source_container": 1,
+      "target_container": 4,
+      "duration_weight": 323.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:38.436Z",
+      "source_container": 4,
+      "target_container": 5,
+      "duration_weight": 166.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:38.602Z",
+      "source_container": 5,
+      "target_container": 7,
+      "duration_weight": 636.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:39.238Z",
+      "source_container": 7,
+      "target_container": 11,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:39.394Z",
+      "source_container": 11,
+      "target_container": 10,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:39.709Z",
+      "source_container": 10,
+      "target_container": 9,
+      "duration_weight": 161.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:21:39.870Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 160.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:21:42.980Z",
+      "source_container": 10,
+      "target_container": 6,
+      "duration_weight": 166.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:28:27.073Z",
+      "source_container": 6,
+      "target_container": 14,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:28:27.233Z",
+      "source_container": 14,
+      "target_container": 13,
+      "duration_weight": 154.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:28:29.377Z",
+      "source_container": 13,
+      "target_container": 8,
+      "duration_weight": 150.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:28:29.527Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 0.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:28:29.687Z",
+      "source_container": 9,
+      "target_container": 5,
+      "duration_weight": 154.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:28:30.320Z",
+      "source_container": 5,
+      "target_container": 6,
+      "duration_weight": 487.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:28:30.978Z",
+      "source_container": 6,
+      "target_container": 10,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:28:31.300Z",
+      "source_container": 10,
+      "target_container": 9,
+      "duration_weight": 160.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:28:31.628Z",
+      "source_container": 9,
+      "target_container": 5,
+      "duration_weight": 164.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:28:31.792Z",
+      "source_container": 5,
+      "target_container": 6,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:28:31.960Z",
+      "source_container": 6,
+      "target_container": 5,
+      "duration_weight": 486.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-05T14:28:32.608Z",
+      "source_container": 5,
+      "target_container": 11,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:28:32.929Z",
+      "source_container": 11,
+      "target_container": 10,
+      "duration_weight": 0.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-05T14:28:33.582Z",
+      "source_container": 10,
+      "target_container": 6,
+      "duration_weight": 0.0,
+      "is_selected": false
+    }
+  ],
+  "selected_indices": [
+    9,
+    5
+  ],
+  "ratings": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    4,
+    0,
+    0,
+    0,
+    4,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}

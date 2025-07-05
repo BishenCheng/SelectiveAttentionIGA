@@ -96,6 +96,8 @@ def evolve_population(ratings, gaze_records, selected_indices,current_population
         if idx < len(selected_indices) and pos < remaining_individuals:
             new_population[pos] = elite_individuals[idx]
 
+    
+
     global previous_elite_solutions  # 再次确保声明为全局变量
     previous_elite_solutions.append(elite_individuals)
     if len(previous_elite_solutions) > 3:
@@ -110,28 +112,39 @@ def evolve_population(ratings, gaze_records, selected_indices,current_population
             # 将每个方案转为 tuple 并构建成 set 进行比较
             def to_set(generation):
                 return set(tuple(ind) for ind in generation)
-
+            
+            def calculate_cosine_distances(gens):
+                distances = []
+                for i in range(len(gens)-1):
+                    for j in range(i+1, len(gens)):
+                        # 假设每个gen是一个个体的列表，这里取第一个个体进行比较
+                        genA = gens[i][0] if isinstance(gens[i], list) else next(iter(gens[i]))
+                        genB = gens[j][0] if isinstance(gens[j], list) else next(iter(gens[j]))
+                        dist = cosine_distance(genA, genB)
+                        distances.append(dist)
+                return distances
 
 
             set1 = to_set(gen1)
             set2 = to_set(gen2)
             set3 = to_set(gen3)
-
+            
+        
             # 认知收敛条件1
             if set1 == set2 == set3:
                 print("✅ 实验终止条件满足：连续三代有3个相同的精英方案（顺序无关）")
                 return [], elite_positions
 
-            # 认知收敛条件2
-            # 三代内任意两个方案的余弦距离 < 0.1
-            # all_gens = [gen1, gen2, gen3]
-            # for gen in all_gens:
-            #     # 确保每个世代至少有一个方案可以与其他世代比较
-            #     if len(gen) > 0:
-            #         distances = calculate_cosine_distances(all_gens)
-            #         if all(d < 0.1 for d in distances):
-            #             print("✅ 实验终止条件满足：连续三代内发生的修改的余弦距离小于0.1")
-            #             return [], elite_positions
+            #认知收敛条件2
+            #三代内任意两个方案的余弦距离 < 0.1
+            all_gens = [gen1, gen2, gen3]
+            for gen in all_gens:
+                # 确保每个世代至少有一个方案可以与其他世代比较
+                if len(gen) > 0:
+                    distances = calculate_cosine_distances(all_gens)
+                    if all(d < 0.1 for d in distances):
+                        print("✅ 实验终止条件满足：连续三代内发生的修改的余弦距离小于0.1")
+                        return [], elite_positions
 
     return new_population, elite_positions
 

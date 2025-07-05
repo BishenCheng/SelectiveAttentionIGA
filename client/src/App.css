@@ -287,3 +287,104 @@ button {
   background: #ddd;
   border-radius: 5px;
 }
+
+/* 侧边栏*/
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  width: 90vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  flex: 1;
+  margin-top: 20px;
+  overflow: auto;
+}
+
+.modal-image-item {
+  position: relative;
+  display: inline-block;
+}
+
+.modal-image {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+  flex: 1;
+  overflow: auto;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #fff;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0 10px;
+  z-index: 10;
+}
+
+.modal-image-item {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.vasecode {
+  font-size: 0.8em;
+  margin-top: 5px;
+  color: #666;
+  word-break: break-all;
+}
+
+.historical-section {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+  overflow: auto;
+}
+
+.generation-record {
+  margin-bottom: 20px;
+}

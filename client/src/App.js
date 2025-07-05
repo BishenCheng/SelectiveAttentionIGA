@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState, useEffect, useRef } from 'react';
 import webgazer from 'webgazer';
+import Modal from './Modal';
 
 function App() {
   const [svgImages, setSvgImages] = useState(Array(16).fill(null));
@@ -20,11 +21,14 @@ function App() {
 
   const [experimentEnded, setExperimentEnded] = useState(false); // 新增：实验是否已完成
   const[EchoMessage,setEchoMessage] = useState(false);//新增：提醒用户去浏览选择
+  
+  const [isModalOpen, setIsModalOpen] = useState(false); // 新增弹窗
+  const [historicalSelections, setHistoricalSelections] = useState([]); // 新增历史精英选择。
 
   const [initializeClickCount, setInitializeClickCount] = useState(0); // 新增：记录初始化按钮点击次数
   // A版
   // 新增初始化 ratings 状态，确保长度为16，初始值为3
-  const [ratings, setRatings] = useState(Array(16).fill(3)); // 修改此处
+  const [ratings, setRatings] = useState(Array(16).fill(1)); // 修改此处
 
 
   // 加载indexDB 跨域通信机制。接听3001端口的消息。
@@ -460,8 +464,24 @@ function App() {
       }
       const data = await response.json();
       console.log('迭代响应数据:', data);
+      
       if (data.new_jpg && data.new_population) {
         const jpgUrls = data.new_jpg.map(base64Jpg => `data:image/png;base64,${base64Jpg}`);
+        
+        //保存历史记录
+        const currentGeneration = historicalSelections.length + 1;
+        const selectedItems = Array.from(selectedIndices).map(index => ({
+          vasecode: currentPopulation[index], // 假设currentPopulation存储的是vasecode
+          base64: jpgUrls[index],
+          generation: currentGeneration,
+          index: index
+        }));
+
+        setHistoricalSelections(prev => [...prev, {
+          generation: currentGeneration,
+          selections: selectedItems
+        }]);
+
 
         setSvgImages(jpgUrls);
         setGazeRecords([]); // 清空注视记录
@@ -504,7 +524,7 @@ function App() {
       )}
       {EchoMessage && (
           <div className="experiment-echo-message">
-            <h2>请确保你已浏览，且已选择1-3个方案</h2>
+            <h2>请确保你已评分，且已选择0-3个方案</h2>
           </div>
       )}
 
@@ -519,7 +539,7 @@ function App() {
             onClick={handleInitialize}
             disabled={initializeClickCount >= 2 || isInitializing} // 点击两次后禁用按钮
         >
-          {isEvolving ? '运行中...' : '开始 Intialize'}
+          {isEvolving ? '运行中...' : '实验开始 Intialize'}
         </button>
 
         {/*<button onClick={handleEvolve}>方案迭代 Evolve</button>*/}
@@ -528,6 +548,13 @@ function App() {
           disabled={isEvolving}  // 绑定防抖状态
         >
           {isEvolving ? '运行中...' : '方案迭代   Evolve'}
+        </button>
+
+         <button
+          onClick={() => setIsModalOpen(true)}
+          // disabled={selectedIndices.size === 0}
+        >
+          查看购物车
         </button>
     
       </div>
@@ -558,6 +585,33 @@ function App() {
               </div>
             </div>
             
+            {/* 弹窗 */}
+            <Modal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              images={svgImages}
+                currentImages={{
+                images: svgImages,
+                selectedIndices,
+                generation: historicalSelections.length + 1
+              }}
+              currentPopulation={currentPopulation} // 新增传递当前种群
+              selectedIndices={selectedIndices} // 新增传递选中索引
+              historicalSelections={historicalSelections}
+              setSelectedIndices={setSelectedIndices}
+                        // 新增：添加删除历史记录的方法
+              onDeleteHistoricalRecord={(generationIndex, recordIndex) => {
+                const newHistorical = [...historicalSelections];
+                newHistorical[generationIndex].selections.splice(recordIndex, 1);
+                if (newHistorical[generationIndex].selections.length === 0) {
+                  newHistorical.splice(generationIndex, 1);
+                }
+                setHistoricalSelections(newHistorical);
+              }}
+            />
+
+
+
             {/* 滑动条在图片容器底部 */}
             <div className="rating-wrapper">
               <div className="rating-container">
