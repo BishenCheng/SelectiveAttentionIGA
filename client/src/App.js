@@ -27,13 +27,9 @@ function App() {
 
   const [initializeClickCount, setInitializeClickCount] = useState(0); // 新增：记录初始化按钮点击次数
   // A版
-  // 新增初始化 ratings 状态，确保长度为16，初始值为3
+  // 新增初始化 ratings 状态，确保长度为16，初始值为1
   const [ratings, setRatings] = useState(Array(16).fill(1)); // 修改此处
 
-
-  // 加载indexDB 跨域通信机制。接听3001端口的消息。
-  const [dbdata, setData] = useState(null);
-  const [writeStatus, setWriteStatus] = useState('');
 
   // 新增 handleRatingChange 函数
   const handleRatingChange = (index, value) => {
@@ -42,84 +38,7 @@ function App() {
     setRatings(newRatings);
   };
 
-  // 打开 3001 页面并发送请求
-  const handleGetDataAndWrite = () => {
-    if (!window.otherWindow || window.otherWindow.closed) {
-      window.otherWindow = window.open('http://localhost:3001/calibration.html?', '_blank');
-    }
-
-    window.otherWindow.postMessage(
-      { type: 'read', key: 'webgazerGlobalData' },
-      'http://localhost:3001/calibration.html?'
-    );
-  };
-
-  // 接收 3001 返回的数据并写入本地 IndexedDB
-  useEffect(() => {
-    const handleMessage = async (event) => {
-      if (event.origin !== 'http://localhost:3001/calibration.html?') return;
-
-      if (event.data && event.data.type === 'response') {
-        const dbdata = event.data.data;
-
-        try {
-          // 写入到 3000 的 IndexedDB
-          await writeDataToIndexedDB(dbdata);
-          setWriteStatus('数据写入成功');
-        } catch (error) {
-          setWriteStatus('写入失败:' + error.message);
-        }
-      }
-    };
-
-    window.addEventListener('message', handleMessage);
-    return () => {
-      window.removeEventListener('message', handleMessage);
-    };
-  }, []);
-
-  // 写入 IndexedDB 的函数
-  const writeDataToIndexedDB = async (dbdata) => {
-    console.log('开始写入数据:', dbdata); // 添加日志
-    const request = indexedDB.open('localforge', 1); // 数据库名称和版本
-    return new Promise((resolve, reject) => {
-      request.onerror = (event) => {
-        console.error('打开数据库失败:', event.target.error); // 明确输出错误
-        reject('打开数据库失败:', event.target.error);
-      };
-
-      request.onsuccess = (event) => {
-        const db = event.target.result;
-        console.log('数据库已打开:', db); // 确认数据库打开成功
-
-        const transaction = db.transaction(['keyvaluepairs'], 'readwrite');
-        const store = transaction.objectStore('keyvaluepairs');
-
-        // 使用 put 方法更新或插入数据
-        const putRequest = store.put(dbdata, 'webgazerGlobalData'); // key 为 "webgazerGlobalData"
-
-        putRequest.onsuccess = () => {
-          db.close();
-          console.log('写入成功'); // 确认写入成功
-          resolve('数据已写入');
-        };
-
-        putRequest.onerror = (event) => {
-          console.error('写入失败:', event.target.error); // 明确输出错误
-          db.close();
-          reject('写入失败:', event.target.error);
-        };
-      };
-
-      // 如果数据库不存在或需要升级
-      request.onupgradeneeded = (event) => {
-        const db = event.target.result;
-        if (!db.objectStoreNames.contains('keyvaluepairs')) {
-          db.createObjectStore('keyvaluepairs', { keyPath: 'id' }); // 根据你的结构调整 keyPath
-        }
-      };
-    });
-  };
+  
 
   // 加载 webgazer.js 设置监听器.（本地脚本版本）
   // useEffect(() => {
@@ -474,8 +393,12 @@ function App() {
           vasecode: currentPopulation[index], // 假设currentPopulation存储的是vasecode
           base64: jpgUrls[index],
           generation: currentGeneration,
-          index: index
+          index: index,
+      
+
         }));
+
+        console.log('保存的历史记录:', selectedItems); // 调试日志
 
         setHistoricalSelections(prev => [...prev, {
           generation: currentGeneration,
@@ -539,7 +462,7 @@ function App() {
             onClick={handleInitialize}
             disabled={initializeClickCount >= 2 || isInitializing} // 点击两次后禁用按钮
         >
-          {isEvolving ? '运行中...' : '实验开始 Intialize'}
+          {isEvolving ? '运行中...' : '实验开始'}
         </button>
 
         {/*<button onClick={handleEvolve}>方案迭代 Evolve</button>*/}
@@ -547,7 +470,7 @@ function App() {
           onClick={handleEvolve}
           disabled={isEvolving}  // 绑定防抖状态
         >
-          {isEvolving ? '运行中...' : '方案迭代   Evolve'}
+          {isEvolving ? '运行中...' : '方案迭代'}
         </button>
 
          <button
@@ -599,7 +522,8 @@ function App() {
               selectedIndices={selectedIndices} // 新增传递选中索引
               historicalSelections={historicalSelections}
               setSelectedIndices={setSelectedIndices}
-                        // 新增：添加删除历史记录的方法
+              
+              // 新增：添加删除历史记录的方法
               onDeleteHistoricalRecord={(generationIndex, recordIndex) => {
                 const newHistorical = [...historicalSelections];
                 newHistorical[generationIndex].selections.splice(recordIndex, 1);
@@ -610,12 +534,12 @@ function App() {
               }}
             />
 
-
+            
 
             {/* 滑动条在图片容器底部 */}
             <div className="rating-wrapper">
               <div className="rating-container">
-                <span>1</span>
+                <span></span>
                 <input 
                   type="range" 
                   min="1" 
@@ -627,6 +551,9 @@ function App() {
                   className={`rating-slider ${ratings[index] > 0 ? 'green-slider' : ''}`}
                 />
                 <span>5</span>
+
+                  {/* 新增显示数值的小方块 */}
+                  <div className="rating-value">{ratings[index]}</div> 
               </div>
             </div>
           </div>

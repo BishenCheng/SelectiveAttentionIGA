@@ -21,3 +21,5 @@ uvicorn main:app --reload --host 127.0.0.1 --port 8000
 #localhost:3000:calibration是主界面
 npm start
 ```
+
+

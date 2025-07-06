@@ -103,12 +103,12 @@ body, html {
 
 
 /* 新增上一批次精英状态样式 */
-.image-item.elite {
-  border: 5px solid rgba(19, 19, 19, 0.49); /* 亮边框 */
-  box-shadow: 0 0 8px rgba(136, 136, 136, 0.3); /* 红色阴影 */
+/* .image-item.elite { */
+  /* border: 5px solid rgba(19, 19, 19, 0.49); 边框
+  box-shadow: 0 0 8px rgba(136, 136, 136, 0.3); 红色阴影 */
   /*background-color: rgba(44, 43, 43, 0.13);*/
-  z-index: 0; /* 低于 selected */
-}
+  /* z-index: 0; 低于 selected */
+/* } */
 
 /* 移除原评分滑动条样式（如果有残留） */
 .image-item .rating-slider {
@@ -226,13 +226,27 @@ button {
   z-index: 2;
 }
 
+.rating-value {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 18px;
+  position: absolute;
+  top: -30px; /* 位于滑条上方 */
+  transform: translateX(-50%);
+  z-index: 4;
+  /* 动态定位，跟随滑块 */
+  left: calc(((var(--value) - 1) / (5 - 1)) * 100%);
+}
+
 /* 保持原有滑动条样式不变 */
 .rating-slider {
   flex: 1;
   margin: 0 10px;
   -webkit-appearance: none;
-  height: 6px;
-  border-radius: 5px;
+  height: 10px;
+  border-radius: 14px;
   background: #eee;
   outline: none;
   pointer-events: auto;
@@ -240,35 +254,37 @@ button {
   
 }
 
+
+
 .rating-slider.green-slider {
-  background: #e7ffe7; /* 绿色背景 */
+  background: #707070; /* 绿色背景 */
 }
 
 .rating-slider.green-slider::-webkit-slider-thumb {
-  background: #919191; /* 更深的绿色 */
+  background: #535353; /* 更深的绿色 */
 }
 
 .rating-slider.green-slider::-moz-range-thumb {
-  background: #919191; /* 更深的绿色 */
+  background: #535353; /* 更深的绿色 */
 }
 
 .rating-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: #e7ffe7;
+  background: #c5c5c5;
   cursor: pointer;
   -webkit-transition: background 0.3s ease;
   transition: background 0.3s ease;
 }
 
 .rating-slider::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: #4CAF50;
+  background: #3b3b3b;
   cursor: pointer;
   -moz-transition: background 0.3s ease;
   transition: background 0.3s ease;
@@ -296,7 +312,7 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(27, 27, 27, 0.144);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -304,8 +320,8 @@ button {
 }
 
 .modal-content {
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: 80vw;
+  max-height: 80vh;
   background: white;
   padding: 20px;
   border-radius: 8px;
