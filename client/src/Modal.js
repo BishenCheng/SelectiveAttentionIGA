@@ -69,6 +69,7 @@ class Modal extends React.Component {
                         {/* 使用辅助函数格式化 vasecode */}
                         {formatVaseCode(item.vasecode)}
                       </div>
+                      
                       <button 
                         className="delete-btn"
                         onClick={() => {
@@ -117,6 +118,8 @@ class Modal extends React.Component {
               </div>
             ))}
           </div>
+
+
         </div>
       </div>,
       this.el

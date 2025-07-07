@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef,useCallback } from 'react';
 import webgazer from 'webgazer';
 import Modal from './Modal';
 
@@ -22,7 +22,10 @@ function App() {
   const [experimentEnded, setExperimentEnded] = useState(false); // 新增：实验是否已完成
   const[EchoMessage,setEchoMessage] = useState(false);//新增：提醒用户去浏览选择
   
-  const [isModalOpen, setIsModalOpen] = useState(false); // 新增弹窗
+  const [isModalOpen, setIsModalOpen] = useState(false); // 弹窗状态
+  // const [handleOpenModal, handleCloseModal] = useState(false); // 弹窗打开关眼动
+  const [currentlyTracking, setCurrentlyTracking] = useState(true); // 新增追踪状态
+
   const [historicalSelections, setHistoricalSelections] = useState([]); // 新增历史精英选择。
 
   const [initializeClickCount, setInitializeClickCount] = useState(0); // 新增：记录初始化按钮点击次数
@@ -152,14 +155,39 @@ function App() {
   //   };
   //   document.body.appendChild(script);
   // }, []);
+  // 使用 useCallback 缓存函数，确保依赖更新时获取最新状态
+  const handleOpenModal = useCallback(() => {
+    console.log('尝试打开弹窗并暂停 WebGazer');
+    setIsModalOpen(true);
+    if (currentlyTracking && isWebgazerInitialized.current && window.webgazer) {
+      try {
+        webgazer.end();
+        webgazer.stopVideo();
+        setCurrentlyTracking(false);
+      } catch (error) {
+        console.error('停止 WebGazer 时出错:', error);
+      }
+    }
+  }, [currentlyTracking, isWebgazerInitialized]); // 依赖状态变化时更新函数
 
-  
-  // 加载 webgazer.js 设置监听器.
+  const handleCloseModal = useCallback(() => {
+    console.log('尝试关闭弹窗并恢复 WebGazer');
+    setIsModalOpen(false);
+    if (!currentlyTracking && window.webgazer) {
+      try {
+        webgazer.begin();
+        webgazer.showVideo(true);
+        setCurrentlyTracking(true);
+      } catch (error) {
+        console.error('启动 WebGazer 时出错:', error);
+      }
+    }
+  }, [currentlyTracking]); // 依赖状态变化时更新函数
+
+  // 加载 webgazer.js 设置监听器（修正后的 useEffect）
   useEffect(() => {
-
     if (window.__gazeListenerAttached) return;
     window.__gazeListenerAttached = true;
-
     if (isWebgazerInitialized.current) return;
 
     // 如果是 npm 安装并使用 import 引入 webgazer，则可以直接调用 begin()。
@@ -255,6 +283,7 @@ function App() {
     return () => {
       // window.webgazer.end();
       // window.__gazeListenerAttached = false;
+      
       if (window.webgazer && typeof window.webgazer.end === 'function') {
         try {
           window.webgazer.end();
@@ -265,9 +294,31 @@ function App() {
       window.__gazeListenerAttached = false;
       isWebgazerInitialized.current = false;
     };
-
   }, []);
 
+    // 从 useEffect 返回值中获取函数
+
+
+  // }, []);
+
+//三个基础事件：弹窗打开-弹窗关闭-点击容器
+  // const handleOpenModal = () => {
+  //     setIsModalOpen(true);
+  //   if (currentlyTracking) {
+  //     webgazer.end();
+  //     webgazer.stopVideo();
+  //     setCurrentlyTracking(false);
+  //   }
+  // };
+
+  // const handleCloseModal = () => {
+  //   setIsModalOpen(false);
+  //   if (!currentlyTracking) {
+  //     webgazer.begin();
+  //     webgazer.showVideo(true);
+  //     setCurrentlyTracking(true);
+  //   }
+  // };
 
   const handleContainerClick = (index) => {
 
@@ -464,7 +515,7 @@ function App() {
         >
           {isEvolving ? '运行中...' : '实验开始'}
         </button>
-
+      
         {/*<button onClick={handleEvolve}>方案迭代 Evolve</button>*/}
         <button
           onClick={handleEvolve}
@@ -473,12 +524,24 @@ function App() {
           {isEvolving ? '运行中...' : '方案迭代'}
         </button>
 
-         <button
+         {/* <button
           onClick={() => setIsModalOpen(true)}
           // disabled={selectedIndices.size === 0}
         >
           查看购物车
-        </button>
+        </button> */}
+
+         <button 
+          onClick={handleOpenModal}
+          //  onClick={() => {
+          //     webgazer.end()
+          //     webgazer.stopVideo()
+
+          //     setCurrentlyTracking(false)
+          //  }}
+          >
+          方案池
+          </button>
     
       </div>
       </div>
@@ -511,7 +574,8 @@ function App() {
             {/* 弹窗 */}
             <Modal
               isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
+              onClose={handleCloseModal}
+              // onClose={() => setIsModalOpen(false)}
               images={svgImages}
                 currentImages={{
                 images: svgImages,

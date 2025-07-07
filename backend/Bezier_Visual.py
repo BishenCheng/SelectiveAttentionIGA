@@ -240,4 +240,4 @@ c = [
     1,
     0
 ]
-print(vis_vase3D(c,1))
+# print(vis_vase3D(c,1))
