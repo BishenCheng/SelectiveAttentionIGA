@@ -312,7 +312,35 @@ function App() {
     if (isEvolving) return; // 防止重复调用
 
     setIsEvolving(true); // 开启防抖锁
-    try {
+
+    // ---------------- 新增：提前保存当前代历史记录 ----------------
+  const currentGeneration = historicalSelections.length + 1;
+  // 使用当前代的图片地址（svgImages）和种群数据（currentPopulation）
+  const selectedItems = Array.from(selectedIndices).map(index => ({
+    vasecode: currentPopulation[index], 
+    base64: svgImages[index],  // 改为使用当前代图片地址
+    generation: currentGeneration,
+    index: index,
+  }));
+
+  // 生成add操作日志（使用当前代数据）
+  const addLogs = Array.from(selectedIndices).map(index => ({
+    timestamp: new Date().toISOString(),
+    generation: currentGeneration,
+    vasecode: currentPopulation[index],
+    operation: 'add'
+  }));
+
+  // 提前更新历史记录和操作日志
+  setHistoricalSelections(prev => [...prev, {
+    generation: currentGeneration,
+    selections: selectedItems
+  }]);
+  setOperationLogs(prev => [...prev, ...addLogs]); 
+  console.log('保存的当前代历史记录:', selectedItems); 
+  // -----------------------------------------------------------
+    
+  try {
       // 整理最终选中状态到记录（最后一次选中）
       const finalRecords = gazeRecords.map(record => ({
         ...record,
@@ -340,33 +368,7 @@ function App() {
       if (data.new_jpg && data.new_population) {
         const jpgUrls = data.new_jpg.map(base64Jpg => `data:image/png;base64,${base64Jpg}`);
         
-        //保存历史记录
-        const currentGeneration = historicalSelections.length + 1;
-        const selectedItems = Array.from(selectedIndices).map(index => ({
-          vasecode: currentPopulation[index], // 假设currentPopulation存储的是vasecode
-          base64: jpgUrls[index],
-          generation: currentGeneration,
-          index: index,
-      
-
-        }));
-
-        // 新增：生成add操作日志（在保存历史记录后立即执行）
-      const addLogs = Array.from(selectedIndices).map(index => ({
-        timestamp: new Date().toISOString(),
-        generation: currentGeneration,
-        vasecode: currentPopulation[index],
-        operation: 'add'
-      }));
-      setOperationLogs(prev => [...prev, ...addLogs]); // 合并新日志
-
-        console.log('保存的历史记录:', selectedItems); // 调试日志
-
-        setHistoricalSelections(prev => [...prev, {
-          generation: currentGeneration,
-          selections: selectedItems
-        }]);
-
+       
 
         setSvgImages(jpgUrls);
         setGazeRecords([]); // 清空注视记录
@@ -379,6 +381,9 @@ function App() {
 
         setExperimentEnded(false); // 实验未结束
         setEchoMessage(false); // 无需提示
+
+        //自动弹出一次
+        handleOpenModal();
 
       } else {
         console.error('响应数据中缺少必要字段');
