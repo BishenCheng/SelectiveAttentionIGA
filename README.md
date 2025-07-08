@@ -7,10 +7,10 @@
 cd D:\CBS_tryProject\realEvoDiff\EvoDiff\Scripts
 .\activate
 
-#  回到项目主目录
+#  回到项目主目录(自己回)
 
 # 进入后端目录
-cd backendcd
+cd backend
 
 # 启动uvicorn服务器
 uvicorn main:app --reload --host 127.0.0.1 --port 8000  

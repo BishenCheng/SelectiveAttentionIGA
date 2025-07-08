@@ -26,7 +26,8 @@ class Modal extends React.Component {
       selectedIndices,   
       historicalSelections, 
       setSelectedIndices,
-      onDeleteHistoricalRecord 
+      onDeleteHistoricalRecord,
+      onLogOperation // 新增：解构onLogOperation
     } = this.props;
     
     if (!isOpen) return null;
@@ -76,6 +77,7 @@ class Modal extends React.Component {
                           const newSet = new Set(selectedIndices);
                           newSet.delete(index);
                           setSelectedIndices(newSet);
+                          onLogOperation(currentImages.generation, item.vasecode, 'remove');// 记录用户手动删除操作
                         }}
                       >x</button>
                     </div>
@@ -109,7 +111,11 @@ class Modal extends React.Component {
                         </div>
                         <button 
                           className="delete-btn"
-                          onClick={() => onDeleteHistoricalRecord(generationIndex, idx)}
+                          onClick={() => {
+                            onDeleteHistoricalRecord(generationIndex, idx);
+                            onLogOperation(record.generation, item.vasecode, 'remove');
+                          }}
+                          
                         >x</button>
                       </div>
                     );

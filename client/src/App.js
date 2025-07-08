@@ -22,9 +22,11 @@ function App() {
   const [experimentEnded, setExperimentEnded] = useState(false); // 新增：实验是否已完成
   const[EchoMessage,setEchoMessage] = useState(false);//新增：提醒用户去浏览选择
   
+  //弹窗相关的
   const [isModalOpen, setIsModalOpen] = useState(false); // 弹窗状态
   // const [handleOpenModal, handleCloseModal] = useState(false); // 弹窗打开关眼动
   const [currentlyTracking, setCurrentlyTracking] = useState(true); // 新增追踪状态
+  const [operationLogs, setOperationLogs] = useState([]); // 新增：操作日志记录
 
   const [historicalSelections, setHistoricalSelections] = useState([]); // 新增历史精英选择。
 
@@ -41,121 +43,8 @@ function App() {
     setRatings(newRatings);
   };
 
-  
 
-  // 加载 webgazer.js 设置监听器.（本地脚本版本）
-  // useEffect(() => {
-
-  //   if (window.__gazeListenerAttached) return;
-  //   window.__gazeListenerAttached = true;
-
-  //   if (isWebgazerInitialized.current) return;
-
-  //   const script = document.createElement('script');
-  //   script.src = '/webgazer.js';
-  //   script.async = true;
-  //   script.onerror = () => {
-  //     setWebgazerError("Failed to load webgazer.js. 请检查 public 目录下是否存在该文件");
-  //   };
-
-  //   script.onload = () => {
-  //     window.webgazer
-  //       .begin()
-  //       .then(api => {
-  //         console.log('WebGazer 初始化成功');
-
-  //         // 注视点监听
-  //         api.setGazeListener((data, clock) => {
-  //           if (!data) return;
-  //           const x = data.x;
-  //           const y = data.y;
-
-  //           containerRefs.current.forEach((ref, index) => {
-  //             const container = ref.current;
-  //             if (!container) return;
-
-  //             const rect = container.getBoundingClientRect();
-  //             const isInside = x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
-
-  //             // 进入容器
-  //             if (isInside && !startTimeRefs.current[index]) {
-  //               startTimeRefs.current[index] = Date.now();
-
-  //               // 首次注视处理逻辑:构建自指边
-  //               if (prevContainerIndexRef.current === null) {
-  //                 // 生成自指记录
-  //                 const record = {
-  //                   timestamp: new Date().toISOString(),
-  //                   source_container: index,
-  //                   target_container: index,
-  //                   duration_weight: 0,  // 初始值设为0，离开时更新
-  //                   is_selected: selectedIndices.has(index)
-  //                 };
-  //                 setGazeRecords(prev => [...prev, record]);
-  //               }
-  //               // 记录上一个容器到当前容器的转移
-  //               else if (prevContainerIndexRef.current !== index) {
-  //                 const prevIndex = prevContainerIndexRef.current;
-  //                 const record = {
-  //                   timestamp: new Date().toISOString(),
-  //                   source_container: prevIndex,
-  //                   target_container: index,
-  //                   duration_weight: 0,  // 初始值设为0，离开时更新
-  //                   is_selected: selectedIndices.has(index)
-  //                 };
-  //                 setGazeRecords(prev => [...prev, record]);
-  //               }
-  //               prevContainerIndexRef.current = index;
-  //             }
-
-  //             // 离开容器
-  //             if (!isInside && startTimeRefs.current[index]) {
-  //               const duration = (Date.now() - startTimeRefs.current[index]) ;  // 转换为秒
-
-  //               // 更新最后一条记录的duration
-  //               setGazeRecords(prevRecords => {
-  //                 if (prevRecords.length === 0) return prevRecords;
-
-  //                 const lastRecord = { ...prevRecords[prevRecords.length - 1] };
-  //                 if (lastRecord.target_container === index) {
-  //                   lastRecord.duration_weight = duration;
-  //                   return [
-  //                     ...prevRecords.slice(0, prevRecords.length - 1),
-  //                     lastRecord
-  //                   ];
-  //                 }
-
-  //                 return prevRecords;
-  //               });
-
-  //               // 更新注视时间
-  //               setGazeTimes(prev => {
-  //                 const newTimes = [...prev];
-  //                 newTimes[index] += duration;
-  //                 return newTimes;
-  //               });
-
-  //               startTimeRefs.current[index] = null;
-  //             }
-  //           });
-  //         });
-
-  //         api.showPredictionPoints(false);
-  //         isWebgazerInitialized.current = true;
-  //       })
-  //       .catch(err => {
-  //         console.error("WebGazer 初始化失败:", err);
-  //         setWebgazerError(`WebGazer 初始化失败: ${err.message}`);
-  //       });
-
-  //     return () => {
-  //       window.webgazer.end();
-  //       window.__gazeListenerAttached = false;
-  //     };
-  //   };
-  //   document.body.appendChild(script);
-  // }, []);
-  // 使用 useCallback 缓存函数，确保依赖更新时获取最新状态
+  // 使用 useCallback 缓存弹窗-眼动仪控制函数，确保依赖更新时获取最新状态
   const handleOpenModal = useCallback(() => {
     console.log('尝试打开弹窗并暂停 WebGazer');
     setIsModalOpen(true);
@@ -320,23 +209,36 @@ function App() {
   //   }
   // };
 
+  // 用户选择（不是评分）行为的函数
   const handleContainerClick = (index) => {
 
     // 使用函数式更新确保获取最新状态
     setSelectedIndices(prev => {
       const newSelected = new Set(prev); // 基于最新状态创建新Set
-      if (newSelected.has(index)) {
-        newSelected.delete(index);
-      } else {
-        newSelected.add(index);
-      }
+      // if (newSelected.has(index)) {
+      //   newSelected.delete(index);
+      // } else {
+      //   newSelected.add(index);
+      // }
+      const isAdding = !newSelected.has(index);
+      const currentGeneration = historicalSelections.length + 1; // 当前代数
 
       // 如果选中数量超过3个，则移除最早选中的项
-      if (newSelected.size > 3) {
-        const firstIndex = [...newSelected][0]; // 获取最早选中的索引
+       if (isAdding && newSelected.size >= 3) {
+        const firstIndex = [...newSelected][0];
         newSelected.delete(firstIndex);
+
       }
-      return newSelected; // 返回新的Set实例触发重渲染
+
+        // 更新当前操作
+    if (isAdding) {
+      newSelected.add(index);
+    } else {
+      newSelected.delete(index);
+    }
+
+    
+    return newSelected; // 返回新的Set实例触发重渲染
     });
   };
 
@@ -449,6 +351,15 @@ function App() {
 
         }));
 
+        // 新增：生成add操作日志（在保存历史记录后立即执行）
+      const addLogs = Array.from(selectedIndices).map(index => ({
+        timestamp: new Date().toISOString(),
+        generation: currentGeneration,
+        vasecode: currentPopulation[index],
+        operation: 'add'
+      }));
+      setOperationLogs(prev => [...prev, ...addLogs]); // 合并新日志
+
         console.log('保存的历史记录:', selectedItems); // 调试日志
 
         setHistoricalSelections(prev => [...prev, {
@@ -542,6 +453,26 @@ function App() {
           >
           方案池
           </button>
+
+        
+          <button
+            onClick={() => {
+              const jsonData = JSON.stringify(operationLogs, null, 2); // 格式化JSON
+              const blob = new Blob([jsonData], { type: 'application/json' });
+              const url = URL.createObjectURL(blob);
+              
+              // 创建临时a标签触发下载
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = `design_operation_logs_${new Date().toISOString()}.json`;
+              a.click();
+              
+              // 清理资源
+              URL.revokeObjectURL(url);
+            }}
+          >
+            导出行为日志
+          </button>
     
       </div>
       </div>
@@ -587,7 +518,7 @@ function App() {
               historicalSelections={historicalSelections}
               setSelectedIndices={setSelectedIndices}
               
-              // 新增：添加删除历史记录的方法
+              // 新增：添加删除历史的方案记录的方法
               onDeleteHistoricalRecord={(generationIndex, recordIndex) => {
                 const newHistorical = [...historicalSelections];
                 newHistorical[generationIndex].selections.splice(recordIndex, 1);
@@ -595,6 +526,19 @@ function App() {
                   newHistorical.splice(generationIndex, 1);
                 }
                 setHistoricalSelections(newHistorical);
+              }}
+
+              //行为记录部分
+              onLogOperation={(generation, vasecode, operation) => {
+                setOperationLogs(prev => [
+                  ...prev,
+                  {
+                    timestamp: new Date().toISOString(),
+                    generation,
+                    vasecode,
+                    operation
+                  }
+                ]);
               }}
             />
 
