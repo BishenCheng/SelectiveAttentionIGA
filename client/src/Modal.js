@@ -27,6 +27,7 @@ class Modal extends React.Component {
       historicalSelections, 
       setSelectedIndices,
       onDeleteHistoricalRecord,
+      modalError, 
       onLogOperation // 新增：解构onLogOperation
     } = this.props;
     
@@ -45,6 +46,8 @@ class Modal extends React.Component {
         <div className="modal-content">
           <button className="close-btn" onClick={onClose}>×</button>
           <h2>方案池</h2>
+          {/*一个数量限制*/}
+          {modalError && <p className="modal-error" style={{ color: 'red', margin: '10px 0' }}>{modalError}</p>} 
           <p>点击右上角退出</p>
           
           {/* 当前代方案 */}

@@ -27,6 +27,7 @@ function App() {
   // const [handleOpenModal, handleCloseModal] = useState(false); // 弹窗打开关眼动
   const [currentlyTracking, setCurrentlyTracking] = useState(true); // 新增追踪状态
   const [operationLogs, setOperationLogs] = useState([]); // 新增：操作日志记录
+  const [modalError, setModalError] = useState(''); // 弹窗超额度的提示状态
 
   const [historicalSelections, setHistoricalSelections] = useState([]); // 新增历史精英选择。
 
@@ -46,6 +47,7 @@ function App() {
 
   // 使用 useCallback 缓存弹窗-眼动仪控制函数，确保依赖更新时获取最新状态
   const handleOpenModal = useCallback(() => {
+
     console.log('尝试打开弹窗并暂停 WebGazer');
     setIsModalOpen(true);
     if (currentlyTracking && isWebgazerInitialized.current && window.webgazer) {
@@ -59,7 +61,23 @@ function App() {
     }
   }, [currentlyTracking, isWebgazerInitialized]); // 依赖状态变化时更新函数
 
+   
+
+  
   const handleCloseModal = useCallback(() => {
+
+    // 关闭弹窗的的数量策略：计算当前方案池总数量（历史记录中所有方案的总和）
+    const totalSchemes = historicalSelections.reduce(
+      (sum, record) => sum + record.selections.length, 
+      0
+    );
+    
+    if (totalSchemes > 6) {
+      setModalError('请删除多余方案，确保方案池中只有6个以内方案');
+      return; // 超过容量时阻止关闭
+    }
+
+    // 关闭眼动仪策略
     console.log('尝试关闭弹窗并恢复 WebGazer');
     setIsModalOpen(false);
     if (!currentlyTracking && window.webgazer) {
@@ -71,7 +89,8 @@ function App() {
         console.error('启动 WebGazer 时出错:', error);
       }
     }
-  }, [currentlyTracking]); // 依赖状态变化时更新函数
+  }, [currentlyTracking,historicalSelections]); // 依赖状态变化时更新函数
+
 
   // 加载 webgazer.js 设置监听器（修正后的 useEffect）
   useEffect(() => {
@@ -190,24 +209,7 @@ function App() {
 
   // }, []);
 
-//三个基础事件：弹窗打开-弹窗关闭-点击容器
-  // const handleOpenModal = () => {
-  //     setIsModalOpen(true);
-  //   if (currentlyTracking) {
-  //     webgazer.end();
-  //     webgazer.stopVideo();
-  //     setCurrentlyTracking(false);
-  //   }
-  // };
 
-  // const handleCloseModal = () => {
-  //   setIsModalOpen(false);
-  //   if (!currentlyTracking) {
-  //     webgazer.begin();
-  //     webgazer.showVideo(true);
-  //     setCurrentlyTracking(true);
-  //   }
-  // };
 
   // 用户选择（不是评分）行为的函数
   const handleContainerClick = (index) => {
@@ -511,6 +513,7 @@ function App() {
             <Modal
               isOpen={isModalOpen}
               onClose={handleCloseModal}
+              modalError={modalError} 
               // onClose={() => setIsModalOpen(false)}
               images={svgImages}
                 currentImages={{
