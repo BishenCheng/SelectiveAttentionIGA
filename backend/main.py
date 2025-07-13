@@ -170,7 +170,7 @@ async def evolve_population_route(request: UserScoresRequest):  # 使用新的�
     print("用户选中的索引:", selected_indices)
 
     # 遗传算法逻辑
-    new_population  = evolve_population(
+    new_population, elite_positions  = evolve_population(
         gaze_records=gaze_records,  # 传递注视记录
         selected_indices=selected_indices,  # 将选中索引作为精英保留
         current_population=current_population
@@ -189,7 +189,7 @@ async def evolve_population_route(request: UserScoresRequest):  # 使用新的�
         "message": "Population evolved successfully",
         "new_jpg": new_base64_list,
         "new_population": new_population,
-        # "elite_positions":elite_positions
+        "elite_positions":elite_positions
     }
 # 获取 jpg 文件
 @app.post("/generate-svg/")

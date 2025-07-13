@@ -3,27 +3,27 @@ from pyDOE import lhs
 
 
 # 融合设计知识的初始化（4维拉丁超立方采样）
-# def initialize_vase_code(num_genes=32,num_solutions=16):
-#     # 生成4维拉丁超立方采样样本
-#     samples = lhs(4, samples=num_solutions,criterion='maximin')
-#     vase_code = []
-#
-#     for sample in samples:
-#         binary_parts = []
-#         for x in sample:
-#             # 将参数映射到0-255的整数
-#             value = int(x * 255)
-#             # 转换为8位二进制字符串（填充前导零）
-#             binary_str = format(value, '08b')  # 例如：0 -> '00000000'
-#             binary_parts.append(binary_str)
-#
-#         # 拼接四个设计区域的二进制字符串，形成32位完整编码
-#         full_binary = ''.join(binary_parts)  # 例如：'00000000000000000000000000000000'
-#         full_binary_list = [int(bit) for bit in full_binary] # 列表化
-#
-#         vase_code.append(full_binary_list)
-#
-#     return vase_code  # 返回16个32位二进制编码的解
+def initialize_vase_code(num_genes=32,num_solutions=16):
+    # 生成4维拉丁超立方采样样本
+    samples = lhs(4, samples=num_solutions,criterion='maximin')
+    vase_code = []
+
+    for sample in samples:
+        binary_parts = []
+        for x in sample:
+            # 将参数映射到0-255的整数
+            value = int(x * 255)
+            # 转换为8位二进制字符串（填充前导零）
+            binary_str = format(value, '08b')  # 例如：0 -> '00000000'
+            binary_parts.append(binary_str)
+
+        # 拼接四个设计区域的二进制字符串，形成32位完整编码
+        full_binary = ''.join(binary_parts)  # 例如：'00000000000000000000000000000000'
+        full_binary_list = [int(bit) for bit in full_binary] # 列表化
+
+        vase_code.append(full_binary_list)
+
+    return vase_code  # 返回16个32位二进制编码的解
 
 
 # 初始化vase_code列表（均匀）32维LHS
@@ -37,12 +37,12 @@ from pyDOE import lhs
 
 
 # 初始化vase_code列表（随机）
-def initialize_vase_code(num_genes=32, num_solutions=16):
-    vase_code = []
-    for _ in range(num_solutions):
-        vase_code.append(np.random.randint(2, size=num_genes).tolist())
-
-    return vase_code
+# def initialize_vase_code(num_genes=32, num_solutions=16):
+#     vase_code = []
+#     for _ in range(num_solutions):
+#         vase_code.append(np.random.randint(2, size=num_genes).tolist())
+#
+#     return vase_code
 
 
 
