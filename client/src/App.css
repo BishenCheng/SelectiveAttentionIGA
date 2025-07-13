@@ -27,7 +27,7 @@ body, html {
 
 .main-content {
   flex: 1; /* 新增：主内容区自动扩展 */
-  max-width: 1200px; /* 设置容器最大宽度 */
+  max-width: 1600px; /* 设置容器最大宽度 */
   margin: 0 auto; /* 水平居中 */
 }
 
@@ -44,15 +44,27 @@ body, html {
 .images-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4列布局 */
-  gap: 10px; /* 容器之间的间距 */
-  max-width: 1200px; /* 设置容器最大宽度 */
+  /* 容器之间的间距 */
+  gap: 20px;
+  max-width: 1600px; /* 设置容器最大宽度 */
   margin: 0 auto; /* 水平居中 */
-  padding: 10px; /* 添加内边距 */
+  /* 容器内边距 */
+  padding: 20px;
   box-sizing: border-box; /* 确保padding不影响宽度计算 */
 }
 
+.image-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  /* 容器内边距 */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
 .image-item {
-  width: 90%;
+  width: 100%; /* 占满容器宽度 */
   max-width: 100%; /* 防止溢出 */
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -61,9 +73,10 @@ body, html {
   justify-content: space-between;
   align-items: center;
   overflow: visible;
-  padding: 10px;
-  position: relative; /* 添加相对定位 */
-
+  /* 增大内边距 */
+  padding: 15px;
+  position: relative;
+  pointer-events: auto;
 }
 
 .svg-object {
@@ -102,12 +115,12 @@ body, html {
 
 
 /* 新增上一批次精英状态样式 */
-.image-item.elite {
-  border: 5px solid rgba(19, 19, 19, 0.49); /* 亮边框 */
-  box-shadow: 0 0 8px rgba(136, 136, 136, 0.3); /* 红色阴影 */
-  /*background-color: rgba(44, 43, 43, 0.13);*/
-  z-index: 0; /* 低于 selected */
-}
+/* .image-item.elite { */
+/* border: 5px solid rgba(19, 19, 19, 0.49); 边框
+box-shadow: 0 0 8px rgba(136, 136, 136, 0.3); 红色阴影 */
+/*background-color: rgba(44, 43, 43, 0.13);*/
+/* z-index: 0; 低于 selected */
+/* } */
 
 /* 移除原评分滑动条样式（如果有残留） */
 .image-item .rating-slider {
@@ -142,6 +155,19 @@ button {
   gap: 15px;
 }
 
+.start-button {
+  margin-top: auto;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 24px;
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 15px;
+  position: relative; /* 添加相对定位 */
+  bottom: 120px; /* 向上移动 120px */
+}
+
 .calibration-container {
   text-align: center;
   margin-top: 20px;
@@ -172,4 +198,702 @@ button {
 
 .image-item .rating-slider input[type="range"] {
   width: 100%;
+}
+
+.images-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 保持4列布局 */
+  gap: 10px; /* 保持间距 */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* 新增统一容器样式 */
+.image-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 5px; /* 保持内边距 */
+  box-sizing: border-box;
+}
+
+.image-item {
+  width: 100%; /* 占满容器宽度 */
+  max-width: 100%; /* 防止溢出 */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: visible;
+  padding: 10px;
+  position: relative;
+  pointer-events: auto;
+}
+
+/* 调整评分容器样式 */
+.rating-wrapper {
+  width: 100%; /* 占满图片容器宽度 */
+  margin-top: 8px; /* 与图片的间距 */
+  padding: 0 5px; /* 内边距 */
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.rating-value {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 18px;
+  position: absolute;
+  top: -32px; /* 位于滑条上方 */
+  left: 50%; /* 将元素左侧置于父容器中心 */
+  transform: translateX(-50%);
+  z-index: 4;
+
+}
+
+/* 保持原有滑动条样式不变 */
+.rating-slider {
+  flex: 1;
+  margin: 0 10px;
+  -webkit-appearance: none;
+  height: 16px;
+  border-radius: 6px;
+  background: #eee;
+  outline: none;
+  pointer-events: auto;
+  z-index: 3;
+
+}
+
+
+
+.rating-slider.green-slider {
+  background: #707070; /* 绿色背景 */
+}
+
+.rating-slider.green-slider::-webkit-slider-thumb {
+  background: #535353; /* 更深的绿色 */
+}
+
+.rating-slider.green-slider::-moz-range-thumb {
+  background: #535353; /* 更深的绿色 */
+}
+
+.rating-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #c5c5c5;
+  cursor: pointer;
+  -webkit-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+
+.rating-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #3b3b3b;
+  cursor: pointer;
+  -moz-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+
+.rating-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background: #ddd;
+  border-radius: 5px;
+}
+
+.rating-slider::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  background: #ddd;
+  border-radius: 5px;
+}
+
+/* 侧边栏*/
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(32, 32, 32, 0.288);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-content {
+  max-width: 80vw;
+  max-height: 80vh;
+  background: rgba(231, 231, 231, 0.836);
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  width: 90vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: auto; /* 允许内容溢出时滚动 */
+}
+
+.all-modal-images {
+  display: grid;
+  /* 固定每行显示 3 列 */
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px; /* 增大元素间距 */
+  flex: 1; /* 自动扩展填充空间 */
+  margin-top: 20px;
+}
+
+.modal-image-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.modal-image {
+  /* 进一步增大图片尺寸 */
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* 新增批次号样式 */
+.generation-number {
+  font-size: 0.9em;
+  margin-top: 5px;
+  color: #333;
+  font-weight: bold;
+}
+.modal-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  flex: 1;
+  margin-top: 20px;
+  overflow: auto;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #fff;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0 10px;
+  z-index: 10;
+}
+
+.modal-image-item {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.vasecode {
+  font-size: 0.8em;
+  margin-top: 5px;
+  color: #666;
+  word-break: break-all;
+}
+
+.historical-section {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+  overflow: auto;
+}
+
+.generation-record {
+  margin-bottom: 20px;
+}/* App.css */
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+/* 新增：确保WebGazer的canvas可见 */
+#webgazerVideoContainer,
+#webgazerPredictorVisuals {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 9999 !important;
+  pointer-events: none !important;
+}
+
+.app-container {
+  font-family: sans-serif;
+  text-align: center;
+  display: flex; /* 使用flex布局 */
+  position: relative; /* 新增：为WebGazer canvas定位提供参考 */
+  min-height: 100vh; /* 确保容器占满视口 */
+}
+
+.main-content {
+  flex: 1; /* 新增：主内容区自动扩展 */
+  max-width: 1600px; /* 设置容器最大宽度 */
+  margin: 0 auto; /* 水平居中 */
+}
+
+.sidebar {
+  width: 300px; /* 固定宽度 */
+  padding: 20px;
+  background-color: #f8f8f8; /* 可选背景色 */
+  border-left: 1px solid #ccc; /* 边界线 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.images-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4列布局 */
+  /* 容器之间的间距 */
+  gap: 20px;
+  max-width: 1600px; /* 设置容器最大宽度 */
+  margin: 0 auto; /* 水平居中 */
+  /* 容器内边距 */
+  padding: 20px;
+  box-sizing: border-box; /* 确保padding不影响宽度计算 */
+}
+
+.image-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  /* 容器内边距 */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.image-item {
+  width: 100%; /* 占满容器宽度 */
+  max-width: 100%; /* 防止溢出 */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: visible;
+  /* 增大内边距 */
+  padding: 15px;
+  position: relative;
+  pointer-events: auto;
+}
+
+.svg-object {
+  width: 80%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+
+}
+
+.image-item .content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* 新增选中状态样式 */
+.image-item.selected {
+  border: 5px solid rgba(19, 19, 19, 0.49); /* 亮红色边框 */
+  box-shadow: 0 0 8px rgba(136, 136, 136, 0.3); /* 红色阴影 */
+  z-index: 1; /* 提高层级 */
+}
+
+.image-item.selected::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(100, 99, 99, 0.2);
+  z-index: -1;
+}
+
+
+/* 新增上一批次精英状态样式 */
+/* .image-item.elite { */
+/* border: 5px solid rgba(19, 19, 19, 0.49); 边框
+box-shadow: 0 0 8px rgba(136, 136, 136, 0.3); 红色阴影 */
+/*background-color: rgba(44, 43, 43, 0.13);*/
+/* z-index: 0; 低于 selected */
+/* } */
+
+/* 移除原评分滑动条样式（如果有残留） */
+.image-item .rating-slider {
+  display: none; /* 隐藏评分滑动条 */
+}
+
+.image-item .rating-slider label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.image-item .rating-slider input[type="range"] {
+  width: 100%;
+}
+
+/* button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+} */
+
+button {
+  margin-top: auto;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 24px;
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.start-button {
+  margin-top: auto;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 24px;
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 15px;
+  position: relative; /* 添加相对定位 */
+  bottom: 120px; /* 向上移动 120px */
+}
+
+.calibration-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.calibration-report {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: inline-block;
+  text-align: left;
+}
+
+.calibration-report h3 {
+  margin-top: 0;
+}
+
+.calibration-report p {
+  margin-bottom: 0.5em;
+}
+
+.image-item .rating-slider label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.image-item .rating-slider input[type="range"] {
+  width: 100%;
+}
+
+.images-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 保持4列布局 */
+  gap: 10px; /* 保持间距 */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* 新增统一容器样式 */
+.image-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 5px; /* 保持内边距 */
+  box-sizing: border-box;
+}
+
+.image-item {
+  width: 100%; /* 占满容器宽度 */
+  max-width: 100%; /* 防止溢出 */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: visible;
+  padding: 10px;
+  position: relative;
+  pointer-events: auto;
+}
+
+/* 调整评分容器样式 */
+.rating-wrapper {
+  width: 100%; /* 占满图片容器宽度 */
+  margin-top: 8px; /* 与图片的间距 */
+  padding: 0 5px; /* 内边距 */
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.rating-value {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 18px;
+  position: absolute;
+  top: -32px; /* 位于滑条上方 */
+  left: 50%; /* 将元素左侧置于父容器中心 */
+  transform: translateX(-50%);
+  z-index: 4;
+
+}
+
+/* 保持原有滑动条样式不变 */
+.rating-slider {
+  flex: 1;
+  margin: 0 10px;
+  -webkit-appearance: none;
+  height: 16px;
+  border-radius: 6px;
+  background: #eee;
+  outline: none;
+  pointer-events: auto;
+  z-index: 3;
+
+}
+
+
+
+.rating-slider.green-slider {
+  background: #707070; /* 绿色背景 */
+}
+
+.rating-slider.green-slider::-webkit-slider-thumb {
+  background: #535353; /* 更深的绿色 */
+}
+
+.rating-slider.green-slider::-moz-range-thumb {
+  background: #535353; /* 更深的绿色 */
+}
+
+.rating-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #c5c5c5;
+  cursor: pointer;
+  -webkit-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+
+.rating-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #3b3b3b;
+  cursor: pointer;
+  -moz-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+
+.rating-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background: #ddd;
+  border-radius: 5px;
+}
+
+.rating-slider::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  background: #ddd;
+  border-radius: 5px;
+}
+
+/* 侧边栏*/
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(32, 32, 32, 0.288);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-content {
+  max-width: 80vw;
+  max-height: 80vh;
+  background: rgba(231, 231, 231, 0.836);
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  width: 90vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: auto; /* 允许内容溢出时滚动 */
+}
+
+.all-modal-images {
+  display: grid;
+  /* 固定每行显示 3 列 */
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px; /* 增大元素间距 */
+  flex: 1; /* 自动扩展填充空间 */
+  margin-top: 20px;
+}
+
+.modal-image-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.modal-image {
+  /* 进一步增大图片尺寸 */
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* 新增批次号样式 */
+.generation-number {
+  font-size: 0.9em;
+  margin-top: 5px;
+  color: #333;
+  font-weight: bold;
+}
+.modal-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  flex: 1;
+  margin-top: 20px;
+  overflow: auto;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #fff;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0 10px;
+  z-index: 10;
+}
+
+.modal-image-item {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.vasecode {
+  font-size: 0.8em;
+  margin-top: 5px;
+  color: #666;
+  word-break: break-all;
+}
+
+.historical-section {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+  overflow: auto;
+}
+
+.generation-record {
+  margin-bottom: 20px;
 }

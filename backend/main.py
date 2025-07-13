@@ -7,6 +7,7 @@ from services import init_population, evolve_population, generate_vase_jpg
 from models import VaseCode, InitializePopulationRequest, UserScoresRequest, VaseImageResponse
 from datetime import datetime  # 用于生成时间戳
 import json  # 用于 JSON 操作
+import uvicorn
 
 # 异步处理模块
 import asyncio
@@ -14,8 +15,9 @@ from concurrent.futures import ProcessPoolExecutor
 import functools
 
 
-# 启动方式：uvicorn main:app --reload --host 127.0.0.1 --port 8000
+# B版启动方式：uvicorn main:app --reload --host 127.0.0.1 --port 8001
 app = FastAPI()
+
 
 
 # 设置日志等级为 WARNING 或更高
@@ -205,3 +207,5 @@ def read_root():
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: str = None):
     return {"item_id": item_id, "q": q}
+
+
