@@ -66,85 +66,86 @@ def evolve_population(gaze_records, selected_indices,current_population):
         keep_parents=0 # 设置为0，使用手动保留。
     )
 
-    # ___传统方法___
-    # ga_instance.run()
-    # new_population = ga_instance.population.tolist()
-
-    #___保留精英方法___
-
-    #  1. 精英方案数量
-    num_elites = min(len(selected_indices), 3)
-
-    # 2. 保留用户选择的精英方案
-    new_population= [current_population[i] for i in selected_indices[:num_elites]]
-
-    # 3. 计算精英方案的位置
-    remaining_individuals = len(current_population) - num_elites
-    # total_length = len(current_population)
-    elite_positions = generate_valid_positions(num_elites, remaining_individuals)
-
-    # 4. 运行 PyGAD 生成新的后代种群
+   # ___传统方法___
     ga_instance.run()
-    offspring_population = ga_instance.population.tolist()
-    new_population = offspring_population.copy()  # 用后代填充初始种群，再将精英方案替换到计算好的目标位置上
+    new_population = ga_instance.population.tolist()
 
-    # # 5. 将 PyGAD 生成的个体补充到新种群中
-    # new_population.extend(offspring_population[:remaining_individuals])
+    # #___保留精英方法___
+    #
+    # #  1. 精英方案数量
+    # num_elites = min(len(selected_indices), 3)
+    #
+    # # 2. 保留用户选择的精英方案
+    # new_population= [current_population[i] for i in selected_indices[:num_elites]]
+    #
+    # # 3. 计算精英方案的位置
+    # remaining_individuals = len(current_population) - num_elites
+    # # total_length = len(current_population)
+    # elite_positions = generate_valid_positions(num_elites, remaining_individuals)
+    #
+    # # 4. 运行 PyGAD 生成新的后代种群
+    # ga_instance.run()
+    # offspring_population = ga_instance.population.tolist()
+    # new_population = offspring_population.copy()  # 用后代填充初始种群，再将精英方案替换到计算好的目标位置上
+    #
+    # # # 5. 将 PyGAD 生成的个体补充到新种群中
+    # # new_population.extend(offspring_population[:remaining_individuals])
+    #
+    # # 5. 插入精英方案，为了眼动仪控制精英方案之间的距离！=[1,4]
+    # for idx, pos in enumerate(elite_positions):
+    #     if idx < len(selected_indices) and pos < remaining_individuals:
+    #         new_population[pos] = elite_individuals[idx]
+    #
+    # global previous_elite_solutions  # 再次确保声明为全局变量
+    # previous_elite_solutions.append(elite_individuals)
+    # if len(previous_elite_solutions) > 3:
+    #     previous_elite_solutions.pop(0)  # 保持最多两代数据
+    #
+    # # 判断是否连续两代精英方案完全一致
+    # if len(previous_elite_solutions) == 3:
+    #     gen1, gen2, gen3 = previous_elite_solutions
+    #
+    #     # (必要条件)每一代都有3个精英方案
+    #     if len(gen1) == 3 and len(gen2) == 3 and len(gen3) == 3:
+    #         # 将每个方案转为 tuple 并构建成 set 进行比较
+    #         def to_set(generation):
+    #             return set(tuple(ind) for ind in generation)
+    #
+    #
+    #         # 计算集合余弦距离
+    #         def calculate_cosine_distances(gens):
+    #             distances = []
+    #             for i in range(len(gens)-1):
+    #                 for j in range(i+1, len(gens)):
+    #                     # 假设每个gen是一个个体的列表，这里取第一个个体进行比较
+    #                     genA = gens[i][0] if isinstance(gens[i], list) else next(iter(gens[i]))
+    #                     genB = gens[j][0] if isinstance(gens[j], list) else next(iter(gens[j]))
+    #                     dist = cosine_distance(genA, genB)
+    #                     distances.append(dist)
+    #             return distances
+    #
+    #         set1 = to_set(gen1)
+    #         set2 = to_set(gen2)
+    #         set3 = to_set(gen3)
+    #
+    #         # 认知收敛条件1
+    #         if set1 == set2 == set3:
+    #             print("✅ 实验终止条件满足：连续三代有3个相同的精英方案（顺序无关）")
+    #             return [], elite_positions
+    #
+    #         # 认知收敛条件2
+    #         # 三代内存在两个方案的余弦距离 < 0.1
+    #         all_gens = [gen1, gen2, gen3]
+    #         for gen in all_gens:
+    #             # 确保每个世代至少有一个方案可以与其他世代比较
+    #             if len(gen) > 0:
+    #                 distances = calculate_cosine_distances(all_gens)
+    #                 if all(d < 0.1 for d in distances):
+    #                     print("✅ 实验终止条件满足：连续三代内发生的修改的余弦距离小于0.1")
+    #                     return [], elite_positions
 
-    # 5. 插入精英方案，为了眼动仪控制精英方案之间的距离！=[1,4]
-    for idx, pos in enumerate(elite_positions):
-        if idx < len(selected_indices) and pos < remaining_individuals:
-            new_population[pos] = elite_individuals[idx]
-
-    global previous_elite_solutions  # 再次确保声明为全局变量
-    previous_elite_solutions.append(elite_individuals)
-    if len(previous_elite_solutions) > 3:
-        previous_elite_solutions.pop(0)  # 保持最多两代数据
-
-    # 判断是否连续两代精英方案完全一致
-    if len(previous_elite_solutions) == 3:
-        gen1, gen2, gen3 = previous_elite_solutions
-
-        # (必要条件)每一代都有3个精英方案
-        if len(gen1) == 3 and len(gen2) == 3 and len(gen3) == 3:
-            # 将每个方案转为 tuple 并构建成 set 进行比较
-            def to_set(generation):
-                return set(tuple(ind) for ind in generation)
-
-
-            # 计算集合余弦距离
-            def calculate_cosine_distances(gens):
-                distances = []
-                for i in range(len(gens)-1):
-                    for j in range(i+1, len(gens)):
-                        # 假设每个gen是一个个体的列表，这里取第一个个体进行比较
-                        genA = gens[i][0] if isinstance(gens[i], list) else next(iter(gens[i]))
-                        genB = gens[j][0] if isinstance(gens[j], list) else next(iter(gens[j]))
-                        dist = cosine_distance(genA, genB)
-                        distances.append(dist)
-                return distances
-
-            set1 = to_set(gen1)
-            set2 = to_set(gen2)
-            set3 = to_set(gen3)
-
-            # 认知收敛条件1
-            if set1 == set2 == set3:
-                print("✅ 实验终止条件满足：连续三代有3个相同的精英方案（顺序无关）")
-                return [], elite_positions
-
-            # 认知收敛条件2
-            # 三代内任意两个方案的余弦距离 < 0.1
-            all_gens = [gen1, gen2, gen3]
-            for gen in all_gens:
-                # 确保每个世代至少有一个方案可以与其他世代比较
-                if len(gen) > 0:
-                    distances = calculate_cosine_distances(all_gens)
-                    if all(d < 0.1 for d in distances):
-                        print("✅ 实验终止条件满足：连续三代内发生的修改的余弦距离小于0.1")
-                        return [], elite_positions
-
-    return new_population, elite_positions
+    # return new_population, elite_positions
+    return new_population
 
 # 生成 vase_code 的 SVG
 def generate_vase_jpg(vase_code, idx=0):
