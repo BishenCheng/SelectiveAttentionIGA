@@ -19,8 +19,9 @@ function App() {
   const [isEvolving, setIsEvolving] = useState(false); // 防止重复点击迭代按钮
   const [isInitializing, setIsInitializing] = useState(false); // 防止重复点击初始化按钮
 
-  const [experimentEnded, setExperimentEnded] = useState(false); // 新增：实验是否已完成
+  const [experimentEnded, setExperimentEnded] = useState(false); // 实验是否已完成
   const[EchoMessage,setEchoMessage] = useState(false);//新增：提醒用户去浏览选择
+
   
   //弹窗相关的
   const [isModalOpen, setIsModalOpen] = useState(false); // 弹窗状态
@@ -97,106 +98,213 @@ function App() {
   }, [currentlyTracking,historicalSelections]); // 依赖状态变化时更新函数
 
 
+  // 整个实验终止设置
+   const handleEnd = async () => {
+    // 计算当前批次选中的方案数量
+    const currentSelectedCount = selectedIndices.size;
+    // 计算历史方案的总数
+    const historicalCount = historicalSelections.reduce(
+      (sum, record) => sum + record.selections.length, 
+      0
+    );
+     // 计算方案池中的方案总数量
+    const totalSchemes = currentSelectedCount + historicalCount;
+
+    if (totalSchemes < 6) {
+      setEchoMessage(true); // 提示方案池需要有6个方案才能终止
+      return;
+    } else if (totalSchemes > 6) {
+      setModalError('请删除多余方案，确保方案池中只有6个方案');
+      setIsModalOpen(true); // 弹窗让用户删减
+      return;
+    }
+
+    try {
+      // 整理最终选中状态到记录（最后一次选中）
+      const finalRecords = gazeRecords.map(record => {
+        const adjustedDuration = Math.max(record.duration_weight, 10);
+        return {
+          ...record,
+          duration_weight: adjustedDuration
+        };
+      });
+
+      const finalSelectedIndices = [...selectedIndices, 201]; // 加上序号201
+
+      const response = await fetch('http://localhost:8000/end/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          population: currentPopulation,
+          gaze_records: finalRecords, // 传递注视记录
+          selected_indices: finalSelectedIndices, // 传递选中索引
+          ratings: ratings.map(r => r || 0) // 默认0防止undefined
+        }),
+      });
+      
+      // 保存方案池内操作。
+      const jsonData = JSON.stringify(operationLogs, null, 2); // 格式化JSON
+              const blob = new Blob([jsonData], { type: 'application/json' });
+              const url = URL.createObjectURL(blob);
+              
+              // 创建临时a标签触发下载
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = `design_operation_logs_${new Date().toISOString()}.json`;
+              a.click();
+              
+              // 清理资源
+              URL.revokeObjectURL(url);
+
+      if (!response.ok) {
+        throw new Error(`终止请求失败，状态码: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('终止响应数据:', data);
+      console.log('偏好方案数：',totalSchemes)
+      setExperimentEnded(true); // 标记实验结束
+    } catch (error) {
+      console.error('终止失败:', error);
+    }
+  };
+
   // 加载 webgazer.js 设置监听器（修正后的 useEffect）
+   // 加载 webgazer.js 设置监听器（修正后的 useEffect）
   useEffect(() => {
     if (window.__gazeListenerAttached) return;
     window.__gazeListenerAttached = true;
     if (isWebgazerInitialized.current) return;
 
-    // 如果是 npm 安装并使用 import 引入 webgazer，则可以直接调用 begin()。
+    // 因为是npm 安装并使用 import 引入 webgazer，则可以直接调用 begin()。
     webgazer
-      .begin()
-      .then(api => {
-        console.log('WebGazer 初始化成功');
+        .begin()
+        .then(api => {
+          console.log('WebGazer 初始化成功');
 
-        // 注视点监听
-        api.setGazeListener((data, clock) => {
-          if (!data) return;
-          const x = data.x;
-          const y = data.y;
+          // 注视点监听
+          api.setGazeListener((data, clock) => {
+            if (!data) return;
+            const x = data.x;
+            const y = data.y;
 
-          containerRefs.current.forEach((ref, index) => {
-            const container = ref.current;
-            if (!container) return;
+            containerRefs.current.forEach((ref, index) => {
+              const container = ref.current;
+              if (!container) return;
 
-            const rect = container.getBoundingClientRect();
-            const isInside = x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+              const rect = container.getBoundingClientRect();
+              const isInside = x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
 
-            // 进入容器
-            if (isInside && !startTimeRefs.current[index]) {
-              startTimeRefs.current[index] = Date.now();
+              // 进入容器
+              if (isInside && !startTimeRefs.current[index]) {
+                startTimeRefs.current[index] = Date.now();
 
-              // 首次注视处理逻辑:构建自指边
-              if (prevContainerIndexRef.current === null) {
-                // 生成自指记录
-                const record = {
-                  timestamp: new Date().toISOString(),
-                  source_container: index,
-                  target_container: index,
-                  duration_weight: 0,  // 初始值设为0，离开时更新
-                  is_selected: selectedIndices.has(index)
-                };
-                setGazeRecords(prev => [...prev, record]);
-              }
-              // 记录上一个容器到当前容器的转移
-              else if (prevContainerIndexRef.current !== index) {
-                const prevIndex = prevContainerIndexRef.current;
-                const record = {
-                  timestamp: new Date().toISOString(),
-                  source_container: prevIndex,
-                  target_container: index,
-                  duration_weight: 0,  // 初始值设为0，离开时更新
-                  is_selected: selectedIndices.has(index)
-                };
-                setGazeRecords(prev => [...prev, record]);
-              }
-              prevContainerIndexRef.current = index;
-            }
-
-            // 离开容器
-            if (!isInside && startTimeRefs.current[index]) {
-              const duration = (Date.now() - startTimeRefs.current[index]);  // 转换为毫秒
-
-              // 更新最后一条记录的duration
-              setGazeRecords(prevRecords => {
-                if (prevRecords.length === 0) return prevRecords;
-
-                const lastRecord = { ...prevRecords[prevRecords.length - 1] };
-                if (lastRecord.target_container === index) {
-                  lastRecord.duration_weight = duration;
-                  return [
-                    ...prevRecords.slice(0, prevRecords.length - 1),
-                    lastRecord
-                  ];
+                // 首次注视处理逻辑:构建自指边
+                if (prevContainerIndexRef.current === null) {
+                  // 生成自指记录
+                  const record = {
+                    timestamp: new Date().toISOString(),
+                    source_container: index,
+                    target_container: index,
+                    duration_weight: 0,  // 初始值设为0，离开时更新
+                    is_selected: selectedIndices.has(index)
+                  };
+                  setGazeRecords(prev => [...prev, record]);
                 }
+                // 记录上一个容器到当前容器的转移
+                else if (prevContainerIndexRef.current !== index) {
+                  const prevIndex = prevContainerIndexRef.current;
+                  const record = {
+                    timestamp: new Date().toISOString(),
+                    source_container: prevIndex,
+                    target_container: index,
+                    duration_weight: 0,  // 初始值设为0，离开时更新
+                    is_selected: selectedIndices.has(index)
+                  };
+                  setGazeRecords(prev => [...prev, record]);
+                }
+                prevContainerIndexRef.current = index;
+              }
 
-                return prevRecords;
-              });
+              // 离开容器
+              if (!isInside && startTimeRefs.current[index]) {
+                const duration = (Date.now() - startTimeRefs.current[index]);  // 转换为毫秒
 
-              // 更新注视时间
-              setGazeTimes(prev => {
-                const newTimes = [...prev];
-                newTimes[index] += duration;
-                return newTimes;
-              });
+                // 更新最后一条记录的duration
+                setGazeRecords(prevRecords => {
+                  if (prevRecords.length === 0) return prevRecords;
 
-              startTimeRefs.current[index] = null;
-            }
+                  const lastRecord = { ...prevRecords[prevRecords.length - 1] };
+                  if (lastRecord.target_container === index) {
+                    lastRecord.duration_weight = duration;
+                    return [
+                      ...prevRecords.slice(0, prevRecords.length - 1),
+                      lastRecord
+                    ];
+                  }
+
+                  return prevRecords;
+                });
+
+                // 更新注视时间
+                setGazeTimes(prev => {
+                  const newTimes = [...prev];
+                  newTimes[index] += duration;
+                  return newTimes;
+                });
+
+                startTimeRefs.current[index] = null;
+              }
+            });
           });
-        });
 
-        api.showPredictionPoints(false);
-        isWebgazerInitialized.current = true;
-      })
-      .catch(err => {
-        console.error("WebGazer 初始化失败:", err);
-        setWebgazerError(`WebGazer 初始化失败: ${err.message}`);
+          api.showPredictionPoints(false);
+          isWebgazerInitialized.current = true;
+        })
+        .catch(err => {
+          console.error("WebGazer 初始化失败:", err);
+          setWebgazerError(`WebGazer 初始化失败: ${err.message}`);
+        });
+    // 点击事件监听器
+    const handleClick = (event) => {
+      containerRefs.current.forEach((ref, index) => {
+        const container = ref.current;
+        if (container && container.contains(event.target)) {
+          setGazeRecords(prevRecords => {
+            // 从后往前找到对应容器的最后一条记录
+            for (let i = prevRecords.length - 1; i >= 0; i--) {
+              if (prevRecords[i].target_container === index) {
+                const updatedRecords = [...prevRecords];
+                updatedRecords[i] = {
+                  ...updatedRecords[i],
+                  is_selected: true
+                };
+                return updatedRecords;
+              }
+            }
+
+            // 如果没有找到匹配记录，创建一条新记录
+            const newRecord = {
+              timestamp: new Date().toISOString(),
+              source_container: prevContainerIndexRef.current !== null ? prevContainerIndexRef.current : index,
+              target_container: index,
+              duration_weight: 33,
+              is_selected: true
+            };
+            return [...prevRecords, newRecord];
+          });
+        }
       });
+    };
+
+    document.addEventListener('click', handleClick);
 
     return () => {
       // window.webgazer.end();
       // window.__gazeListenerAttached = false;
-      
+
       if (window.webgazer && typeof window.webgazer.end === 'function') {
         try {
           window.webgazer.end();
@@ -206,13 +314,9 @@ function App() {
       }
       window.__gazeListenerAttached = false;
       isWebgazerInitialized.current = false;
+      document.removeEventListener('click', handleClick);  // 移除点击事件监听器
     };
   }, []);
-
-    // 从 useEffect 返回值中获取函数
-
-
-  // }, []);
 
 
 
@@ -356,10 +460,13 @@ function App() {
     
   try {
       // 整理最终选中状态到记录（最后一次选中）
-      const finalRecords = gazeRecords.map(record => ({
-        ...record,
-        is_selected: selectedIndices.has(record.target_container)
-      }));
+      const finalRecords = gazeRecords.map(record => {
+        const adjustedDuration = Math.max(record.duration_weight, 10);
+        return {
+          ...record,
+          duration_weight: adjustedDuration
+        };
+      });
 
       const response = await fetch('http://localhost:8000/evolve/', {
         method: 'POST',
@@ -435,7 +542,7 @@ function App() {
         )}
 
       {EchoMessage && (
-          <div className="experiment-echo-message">
+          <div className="unrated-warning">
             <h2>请确保你已评分，且已选择0-3个方案</h2>
           </div>
       )}
@@ -484,21 +591,11 @@ function App() {
         
           <button
             onClick={() => {
-              const jsonData = JSON.stringify(operationLogs, null, 2); // 格式化JSON
-              const blob = new Blob([jsonData], { type: 'application/json' });
-              const url = URL.createObjectURL(blob);
+              handleEnd();
               
-              // 创建临时a标签触发下载
-              const a = document.createElement('a');
-              a.href = url;
-              a.download = `design_operation_logs_${new Date().toISOString()}.json`;
-              a.click();
-              
-              // 清理资源
-              URL.revokeObjectURL(url);
             }}
           >
-            导出行为日志
+            结束实验
           </button>
     
       </div>

@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 import numpy as np
 from services import init_population, evolve_population, generate_vase_jpg
-from models import VaseCode, InitializePopulationRequest, UserScoresRequest, VaseImageResponse
+from models import VaseCode, InitializePopulationRequest, UserScoresRequest, VaseImageResponse,EndRequest
 from datetime import datetime  # 用于生成时间戳
 import json  # 用于 JSON 操作
 
@@ -193,6 +193,29 @@ async def evolve_population_route(request: UserScoresRequest):  # 使用新的�
         "new_population": new_population,
         # "elite_positions":elite_positions
     }
+
+@app.post("/end/")
+async def end_experiment(request: EndRequest):
+    # ---------------- 新增：保存 本地的JSON 备份 ----------------
+    # 创建存储目录（如果不存在）
+    save_dir = "json_records"
+    os.makedirs(save_dir, exist_ok=True)
+
+    # 生成时间戳文件名（格式：YYYYMMDDHHMMSS.json）
+    current_time = datetime.now().strftime("%Y%m%d%H%M%S")
+    file_path = os.path.join(save_dir, f"{current_time}_end.json")
+
+    # 将请求数据序列化为 JSON 并保存
+    with open(file_path, "w", encoding="utf-8") as f:
+        # 使用 request.dict() 获取模型的字典数据，indent=2 美化格式
+        json.dump(request.dict(), f, ensure_ascii=False, indent=2)
+    # -----------------------------------------------------
+
+    print("接收到的终止信息:", request)
+    return {
+        "message": "Experiment ended successfully",
+    }
+
 # 获取 jpg 文件
 @app.post("/generate-svg/")
 def generate_svg(vase_code: VaseCode):
