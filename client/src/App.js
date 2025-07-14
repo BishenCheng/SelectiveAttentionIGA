@@ -84,6 +84,79 @@ function App() {
   }, [currentlyTracking,historicalSelections]); // 依赖状态变化时更新函数
 
 
+  // 整个实验终止设置
+  const handleEnd = async () => {
+    // 计算当前批次选中的方案数量
+    const currentSelectedCount = selectedIndices.size;
+    // 计算历史方案的总数
+    const historicalCount = historicalSelections.reduce(
+        (sum, record) => sum + record.selections.length,
+        0
+    );
+    // 计算方案池中的方案总数量
+    const totalSchemes = currentSelectedCount + historicalCount;
+
+    if (totalSchemes < 6) {
+      setEchoMessage(true); // 提示方案池需要有6个方案才能终止
+      return;
+    } else if (totalSchemes > 6) {
+      setModalError('请删除多余方案，确保方案池中只有6个方案');
+      setIsModalOpen(true); // 弹窗让用户删减
+      return;
+    }
+
+    try {
+      // 整理最终选中状态到记录（最后一次选中）
+      const finalRecords = gazeRecords.map(record => {
+        const adjustedDuration = Math.max(record.duration_weight, 10);
+        return {
+          ...record,
+          duration_weight: adjustedDuration
+        };
+      });
+
+      const finalSelectedIndices = [...selectedIndices, 201]; // 加上序号201
+
+      const response = await fetch('http://localhost:8001/end/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          population: currentPopulation,
+          gaze_records: finalRecords, // 传递注视记录
+          selected_indices: finalSelectedIndices, // 传递选中索引
+          // ratings: ratings.map(r => r || 0) // 默认0防止undefined
+        }),
+      });
+
+      // 保存方案池内操作。
+      const jsonData = JSON.stringify(operationLogs, null, 2); // 格式化JSON
+      const blob = new Blob([jsonData], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+
+      // 创建临时a标签触发下载
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `design_operation_logs_${new Date().toISOString()}.json`;
+      a.click();
+
+      // 清理资源
+      URL.revokeObjectURL(url);
+
+      if (!response.ok) {
+        throw new Error(`终止请求失败，状态码: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('终止响应数据:', data);
+      console.log('偏好方案数：',totalSchemes)
+      setExperimentEnded(true); // 标记实验结束
+    } catch (error) {
+      console.error('终止失败:', error);
+    }
+  };
+
   // 加载 webgazer.js 设置监听器（修正后的 useEffect）
   useEffect(() => {
     if (window.__gazeListenerAttached) return;
@@ -513,21 +586,10 @@ function App() {
 
             <button
                 onClick={() => {
-                  const jsonData = JSON.stringify(operationLogs, null, 2); // 格式化JSON
-                  const blob = new Blob([jsonData], { type: 'application/json' });
-                  const url = URL.createObjectURL(blob);
-
-                  // 创建临时a标签触发下载
-                  const a = document.createElement('a');
-                  a.href = url;
-                  a.download = `design_operation_logs_${new Date().toISOString()}.json`;
-                  a.click();
-
-                  // 清理资源
-                  URL.revokeObjectURL(url);
+                  handleEnd();
                 }}
             >
-              导出行为日志
+              结束实验
             </button>
 
           </div>

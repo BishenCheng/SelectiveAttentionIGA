@@ -22,6 +22,14 @@ class UserScoresRequest (BaseModel):
     gaze_records: List[GazeRecord]  # 完整的眼动交互记录
     selected_indices: List[int]  # 从 GazeRecord 中 is_selected=True 的记录提取的目标容器索引（例如 "container_2" → 2）
 
+# 实验终止的一个响应。包含201标识
+class EndRequest(BaseModel):
+    population: List[List[int]]  # 当前种群的二进制编码
+    gaze_records: List[GazeRecord]  # 完整的眼动交互记录
+    selected_indices: List[int]  # 从 GazeRecord 中 is_selected=True 的记录提取的目标容器索引，包含201
+    # ratings: List[int]  # 用户对每个容器的评分
+
+
 class VaseImageResponse(BaseModel):
     jpg_base64: str  # 存储 base64 编码的 jpg字符串
 
