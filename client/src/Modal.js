@@ -28,107 +28,77 @@ class Modal extends React.Component {
       setSelectedIndices,
       onDeleteHistoricalRecord,
       modalError, 
-      onLogOperation // 新增：解构onLogOperation
+      onLogOperation 
     } = this.props;
     
     if (!isOpen) return null;
 
-    // 辅助函数，将 vasecode 列表转换为字符串
     const formatVaseCode = (vasecode) => {
       if (Array.isArray(vasecode)) {
         return vasecode.join(', ').substring(0, 30) + '...';
       }
-      return typeof vasecode === 'string' ? `${vasecode.substring(0, 30)}...` : '未知编码';
+      return typeof vasecode === 'string' ? `${vasecode.substring(0, 30)}...` : '在当前批次';
     };
+
+    // 合并当前代和历史方案
+    const allItems = [
+      ...Array.from({length: currentPopulation.length}, (_, idx) => idx)
+        .filter(index => selectedIndices.has(index))
+        .map(index => ({
+          ...currentPopulation[index],
+          base64: currentImages.images[index],
+          generation: currentImages.generation,
+          index
+        })),
+      ...historicalSelections.flatMap(record => record.selections)
+    ];
 
     return ReactDOM.createPortal(
       <div className="modal-overlay">
         <div className="modal-content">
           <button className="close-btn" onClick={onClose}>×</button>
-          <h2>方案池</h2>
-          {/*一个数量限制*/}
+          <h1>方案池</h1>
           {modalError && <p className="modal-error" style={{ color: 'red', margin: '10px 0' }}>{modalError}</p>} 
-          <p>点击右上角退出</p>
+          <p>点击方案的右上角x图标可以删除该方案，点击右上角退出方案池</p>
           
-          {/* 当前代方案 */}
-          <div className="current-generation">
-            <h3>第{currentImages.generation}代选中方案</h3>
-            <div className="modal-images">
-              {Array.from({length: currentPopulation.length}, (_, idx) => idx)
-                .filter(index => selectedIndices.has(index))
-                .map(index => {
-                  const item = currentPopulation[index]; 
-                  if (!item) {
-                    console.warn(`Item at index ${index} is undefined`);
-                    return null;
-                  }
-                  return (
-                    <div key={`current-${index}`} className="modal-image-item">
-                      <img 
-                        src={currentImages.images[index]} 
-                        alt={`当前-${index}`}
-                        className="modal-image"
-                      />
-                      <div className="vasecode">
-                        {/* 使用辅助函数格式化 vasecode */}
-                        {formatVaseCode(item.vasecode)}
-                      </div>
-                      
-                      <button 
-                        className="delete-btn"
-                        onClick={() => {
-                          const newSet = new Set(selectedIndices);
-                          newSet.delete(index);
-                          setSelectedIndices(newSet);
-                          onLogOperation(currentImages.generation, item.vasecode, 'remove');// 记录用户手动删除操作
-                        }}
-                      >x</button>
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
-
-          {/* 历史方案 */}
-          <div className="historical-section">
-            {historicalSelections.map((record, generationIndex) => (
-              <div key={`gen-${generationIndex}`} className="generation-record">
-                <h4>第{record.generation}代方案</h4>
-                <div className="modal-images">
-                  {record.selections.map((item, idx) => {
-                    if (!item) {
-                      console.warn(`Historical item at generation ${generationIndex}, index ${idx} is undefined`);
-                      return null;
-                    }
-
-                    return ( 
-                      <div key={`hist-${generationIndex}-${idx}`} className="modal-image-item">
-                        <img 
-                          src={item.base64} 
-                          alt={`历史-${item.generation}-${item.selectedIndices}`}
-                          className="modal-image"
-                        />
-                        <div className="vasecode">
-                          {/* 使用辅助函数格式化 vasecode */}
-                          {formatVaseCode(item.vasecode)}
-                        </div>
-                        <button 
-                          className="delete-btn"
-                          onClick={() => {
-                            onDeleteHistoricalRecord(generationIndex, idx);
-                            onLogOperation(record.generation, item.vasecode, 'remove');
-                          }}
-                          
-                        >x</button>
-                      </div>
-                    );
-                  })}
+          {/* 统一显示所有方案 */}
+          <div className="all-modal-images">
+            {allItems.map((item, index) => {
+              if (!item) {
+                console.warn(`Item at index ${index} is undefined`);
+                return null;
+              }
+              return (
+                <div key={`item-${index}`} className="modal-image-item">
+                  <img 
+                    src={item.base64} 
+                    alt={`方案-${item.generation}-${item.index || index}`}
+                    className="modal-image"
+                  />
+                  {/* 新增批次号显示 */}
+                  <div className="generation-number">方案批次: {item.generation}</div>
+                  <div className="vasecode">
+                    {formatVaseCode(item.vasecode)}
+                  </div>
+                  <button 
+                    className="delete-btn"
+                    onClick={() => {
+                      if (item.generation === currentImages.generation) {
+                        const newSet = new Set(selectedIndices);
+                        newSet.delete(item.index);
+                        setSelectedIndices(newSet);
+                      } else {
+                        const genIndex = historicalSelections.findIndex(record => record.generation === item.generation);
+                        const itemIndex = historicalSelections[genIndex].selections.findIndex(i => i.vasecode === item.vasecode);
+                        onDeleteHistoricalRecord(genIndex, itemIndex);
+                      }
+                      onLogOperation(item.generation, item.vasecode, 'remove');
+                    }}
+                  >x</button>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
-
-
         </div>
       </div>,
       this.el

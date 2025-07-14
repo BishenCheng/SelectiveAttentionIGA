@@ -31,10 +31,11 @@ function App() {
 
   const [historicalSelections, setHistoricalSelections] = useState([]); // 新增历史精英选择。
 
-  const [initializeClickCount, setInitializeClickCount] = useState(0); // 新增：记录初始化按钮点击次数
+  const [initializeClickCount, setInitializeClickCount] = useState(0); // 记录初始化按钮点击次数
   // A版
   // 新增初始化 ratings 状态，确保长度为16，初始值为1
-  const [ratings, setRatings] = useState(Array(16).fill(1)); // 修改此处
+  const [ratings, setRatings] = useState(Array(16).fill(1)); // 
+  const [unratedWarning, setUnratedWarning] = useState(false); // 未完成评分警告状态
 
 
   // 新增 handleRatingChange 函数
@@ -44,6 +45,10 @@ function App() {
     setRatings(newRatings);
   };
 
+  // 检查评分完成度函数
+  const checkRatingCompletion = () => {
+    return ratings.every(rating => rating > 0);
+  };
 
   // 使用 useCallback 缓存弹窗-眼动仪控制函数，确保依赖更新时获取最新状态
   const handleOpenModal = useCallback(() => {
@@ -298,7 +303,14 @@ function App() {
 
   const handleEvolve = async () => {
 
-    // 调试信息
+    const isRatingComplete = checkRatingCompletion();
+    if (!isRatingComplete) {
+      setUnratedWarning(true); // 未完成评分，显示警告
+      return;
+    }
+    setUnratedWarning(false); // 评分完成，隐藏警告
+
+    // 进入迭代，输出调试信息
     console.log('--- 迭代开始前的数据 ---');
     console.log('currentPopulation:', currentPopulation);
     console.log('selectedIndices:', Array.from(selectedIndices));
@@ -414,6 +426,14 @@ function App() {
             <h2>实验结束，感谢你的参与</h2>
           </div>
       )}
+
+      {/* 未完成评分警告 */}
+        {unratedWarning && (
+          <div className="unrated-warning">
+            <h2>请完成所有方案的评分后再进行迭代</h2>
+          </div>
+        )}
+
       {EchoMessage && (
           <div className="experiment-echo-message">
             <h2>请确保你已评分，且已选择0-3个方案</h2>
@@ -427,7 +447,7 @@ function App() {
       
       <div className="control-buttons">
 
-        <button
+        <button className="start-button" 
             onClick={handleInitialize}
             disabled={initializeClickCount >= 2 || isInitializing} // 点击两次后禁用按钮
         >
@@ -553,6 +573,7 @@ function App() {
             
 
             {/* 滑动条在图片容器底部 */}
+            
             <div className="rating-wrapper">
               <div className="rating-container">
                 <span></span>
@@ -563,6 +584,7 @@ function App() {
                   value={ratings[index] || 0} 
                   onChange={(e) => handleRatingChange(index, parseInt(e.target.value))}
                   onClick={(e) => e.stopPropagation()}
+                  
                   //className="rating-slider"
                   className={`rating-slider ${ratings[index] > 0 ? 'green-slider' : ''}`}
                 />

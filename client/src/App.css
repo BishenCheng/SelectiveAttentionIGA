@@ -27,7 +27,7 @@ body, html {
 
 .main-content {
   flex: 1; /* 新增：主内容区自动扩展 */
-  max-width: 1200px; /* 设置容器最大宽度 */
+  max-width: 1600px; /* 设置容器最大宽度 */
   margin: 0 auto; /* 水平居中 */
 }
 
@@ -44,15 +44,27 @@ body, html {
 .images-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4列布局 */
-  gap: 10px; /* 容器之间的间距 */
-  max-width: 1200px; /* 设置容器最大宽度 */
+  /* 容器之间的间距 */
+  gap: 20px; 
+  max-width: 1600px; /* 设置容器最大宽度 */
   margin: 0 auto; /* 水平居中 */
-  padding: 10px; /* 添加内边距 */
+  /* 容器内边距 */
+  padding: 20px; 
   box-sizing: border-box; /* 确保padding不影响宽度计算 */
 }
 
+.image-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  /* 容器内边距 */
+  padding: 20px; 
+  box-sizing: border-box;
+}
+
 .image-item {
-  width: 90%;
+  width: 100%; /* 占满容器宽度 */
   max-width: 100%; /* 防止溢出 */
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -61,10 +73,10 @@ body, html {
   justify-content: space-between;
   align-items: center;
   overflow: visible;
-  padding: 10px;
-  position: relative; /* 添加相对定位 */
-  pointer-events: auto;/* 新增：允许子元素的点击事件穿透 */
-
+  /* 增大内边距 */
+  padding: 15px; 
+  position: relative;
+  pointer-events: auto;
 }
 
 .svg-object {
@@ -143,6 +155,19 @@ button {
   gap: 15px;
 }
 
+.start-button {
+  margin-top: auto;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 24px;
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 15px;
+  position: relative; /* 添加相对定位 */
+  bottom: 120px; /* 向上移动 120px */
+}
+
 .calibration-container {
   text-align: center;
   margin-top: 20px;
@@ -210,6 +235,16 @@ button {
   pointer-events: auto;
 }
 
+.unrated-warning {
+  background-color: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 4px;
+  color: #b71c1c;
+  padding: 15px;
+  margin-top: 20px;
+  text-align: center;
+}
+
 /* 调整评分容器样式 */
 .rating-wrapper {
   width: 100%; /* 占满图片容器宽度 */
@@ -233,11 +268,11 @@ button {
   padding: 2px 6px;
   font-size: 18px;
   position: absolute;
-  top: -30px; /* 位于滑条上方 */
+  top: -32px; /* 位于滑条上方 */
+  left: 50%; /* 将元素左侧置于父容器中心 */
   transform: translateX(-50%);
   z-index: 4;
-  /* 动态定位，跟随滑块 */
-  left: calc(((var(--value) - 1) / (5 - 1)) * 100%);
+
 }
 
 /* 保持原有滑动条样式不变 */
@@ -245,8 +280,8 @@ button {
   flex: 1;
   margin: 0 10px;
   -webkit-appearance: none;
-  height: 10px;
-  border-radius: 14px;
+  height: 16px;
+  border-radius: 6px;
   background: #eee;
   outline: none;
   pointer-events: auto;
@@ -271,8 +306,8 @@ button {
 .rating-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: #c5c5c5;
   cursor: pointer;
@@ -281,8 +316,8 @@ button {
 }
 
 .rating-slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: #3b3b3b;
   cursor: pointer;
@@ -330,29 +365,48 @@ button {
   height: 90vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: auto; /* 允许内容溢出时滚动 */
 }
 
+.all-modal-images {
+  display: grid;
+  /* 固定每行显示 3 列 */
+  grid-template-columns: repeat(6, 1fr); 
+  gap: 20px; /* 增大元素间距 */
+  flex: 1; /* 自动扩展填充空间 */
+  margin-top: 20px;
+}
+
+.modal-image-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.modal-image {
+  /* 进一步增大图片尺寸 */
+  width: 100%; 
+  max-width: 350px; 
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* 新增批次号样式 */
+.generation-number {
+  font-size: 0.9em;
+  margin-top: 5px;
+  color: #333;
+  font-weight: bold;
+}
 .modal-images {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 15px;
   flex: 1;
   margin-top: 20px;
-  overflow: auto;
-}
-
-.modal-image-item {
-  position: relative;
-  display: inline-block;
-}
-
-.modal-image {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 15px;
-  margin-top: 20px;
-  flex: 1;
   overflow: auto;
 }
 

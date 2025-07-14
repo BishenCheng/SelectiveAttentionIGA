@@ -58,7 +58,7 @@ def evolve_population(ratings, gaze_records, selected_indices,current_population
         initial_population=current_population,
         num_genes=32,
         fitness_func = fitness_func,
-        parent_selection_type="rank", 
+        parent_selection_type="rws", # A版轮盘赌
         mutation_type=mutation,# 后续修改一下
         crossover_type=crossover,
         crossover_probability=crossover_probability,

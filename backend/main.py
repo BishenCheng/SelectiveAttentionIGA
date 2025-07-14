@@ -8,7 +8,7 @@ from models import VaseCode, InitializePopulationRequest, UserScoresRequest, Vas
 from datetime import datetime  # 用于生成时间戳
 import json  # 用于 JSON 操作
 
-# 新增：导入异步处理模块
+# 导入异步处理模块
 import asyncio
 from concurrent.futures import ProcessPoolExecutor
 #import functools

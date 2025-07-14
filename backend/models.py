@@ -14,7 +14,7 @@ class GazeRecord(BaseModel):
     source_container: int
     target_container: int  # 格式示例：2
     duration_weight: float  # 毫秒
-    is_selected: bool  # 是否发生了选择行为
+    is_selected: bool  # 是否发生了选择行为 
 
 # 用于调用的 UserScoresRequest 模型
 class UserScoresRequest (BaseModel):
