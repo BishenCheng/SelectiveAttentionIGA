@@ -21,7 +21,7 @@ body, html {
   font-family: sans-serif;
   text-align: center;
   display: flex; /* 使用flex布局 */
-  position: relative; /* 新增：为WebGazer canvas定位提供参考 */
+  position: relative; /* 为WebGazer canvas定位提供参考 */
   min-height: 100vh; /* 确保容器占满视口 */
 }
 
@@ -29,6 +29,10 @@ body, html {
   flex: 1; /* 新增：主内容区自动扩展 */
   max-width: 1600px; /* 设置容器最大宽度 */
   margin: 0 auto; /* 水平居中 */
+   /* 右侧内容左移，避免被侧边栏覆盖 */
+  margin-left: 300px; 
+  overflow-y: auto; /* 允许垂直滚动 */
+  height: 100vh; /* 占满视口高度 */
 }
 
 .sidebar {
@@ -39,6 +43,13 @@ body, html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* 新增：固定定位 */
+  position: fixed; 
+  top: 0;
+  left: 0;
+  bottom: 0;
+  /* 新增：添加滚动条，防止内容溢出 */
+  overflow-y: auto; 
 }
 
 .images-container {
@@ -47,6 +58,7 @@ body, html {
   /* 容器之间的间距 */
   gap: 20px; 
   max-width: 1600px; /* 设置容器最大宽度 */
+  position: static;  /* 相对定位 */
   margin: 0 auto; /* 水平居中 */
   /* 容器内边距 */
   padding: 20px; 
@@ -166,6 +178,19 @@ button {
   gap: 15px;
   position: relative; /* 添加相对定位 */
   bottom: 120px; /* 向上移动 120px */
+}
+
+.end-button {
+  margin-top: auto;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 24px;
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 15px;
+  position: relative; /* 添加相对定位 */
+  top: 35px; /* 向下移动 35px */
 }
 
 .calibration-container {

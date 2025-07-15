@@ -166,6 +166,9 @@ function App() {
       console.log('终止响应数据:', data);
       console.log('偏好方案数：',totalSchemes)
       setExperimentEnded(true); // 标记实验结束
+       // 清空图片内容
+      setSvgImages([]); 
+      
     } catch (error) {
       console.error('终止失败:', error);
     }
@@ -552,6 +555,7 @@ function App() {
       {/*  {writeStatus && <p>{writeStatus}</p>}*/}
       {/*</div>*/}
       
+      
       <div className="control-buttons">
 
         <button className="start-button" 
@@ -589,13 +593,13 @@ function App() {
           </button>
 
         
-          <button
+          <button className="end-button" 
             onClick={() => {
               handleEnd();
               
             }}
           >
-            结束实验
+            实验结束
           </button>
     
       </div>
