@@ -152,6 +152,7 @@ function App() {
       console.log('终止响应数据:', data);
       console.log('偏好方案数：',totalSchemes)
       setExperimentEnded(true); // 标记实验结束
+      setSvgImages([]); // 更新图像数据为空
     } catch (error) {
       console.error('终止失败:', error);
     }
@@ -537,8 +538,8 @@ function App() {
               </div>
           )}
           {EchoMessage && (
-              <div className="experiment-echo-message">
-                <h2>请确保你已评分，且已选择0-3个方案</h2>
+              <div className="unrated-warning">
+                <h2>请确保你已注视比较，且已选择1-3个方案</h2>
               </div>
           )}
 
@@ -584,12 +585,12 @@ function App() {
             </button>
 
 
-            <button
+            <button  className="end-button"
                 onClick={() => {
                   handleEnd();
                 }}
             >
-              结束实验
+              实验结束
             </button>
 
           </div>
