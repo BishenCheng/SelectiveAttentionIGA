@@ -117,7 +117,7 @@ function App() {
 
       const finalSelectedIndices = [...selectedIndices, 201]; // 加上序号201
 
-      const response = await fetch('http://localhost:8001/end/', {
+      const response = await fetch('http://localhost:8002/end/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -374,7 +374,7 @@ function App() {
     setGazeRecords([]);
     setSelectedIndices(new Set());
     try {
-      const response = await fetch('http://localhost:8001/initialize/', {
+      const response = await fetch('http://localhost:8002/initialize/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -472,7 +472,7 @@ function App() {
         };
       });
 
-      const response = await fetch('http://localhost:8001/evolve/', {
+      const response = await fetch('http://localhost:8002/evolve/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

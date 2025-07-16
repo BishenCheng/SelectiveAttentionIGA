@@ -15,7 +15,7 @@ from concurrent.futures import ProcessPoolExecutor
 import functools
 
 
-# B版启动方式：uvicorn main:app --reload --host 127.0.0.1 --port 8001
+# C版启动方式：uvicorn main:app --reload --host 127.0.0.1 --port 8002
 app = FastAPI()
 
 

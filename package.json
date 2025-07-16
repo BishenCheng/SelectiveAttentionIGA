@@ -8,7 +8,8 @@
     "dev": "npm run build:react && npm start"
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "react-dom": "^19.0.0"
   },
   "keywords": [],
   "author": "",
