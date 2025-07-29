@@ -17,6 +17,7 @@ function App() {
   const prevContainerIndexRef = useRef(null); // 记录上一个注视的容器索引
 
   const [isEvolving, setIsEvolving] = useState(false); // 防止重复点击迭代按钮
+  const [evolveCooldown, setEvolveCooldown] = useState(0); // 新增：方案迭代冷却时间状态15秒
   const [isInitializing, setIsInitializing] = useState(false); // 防止重复点击初始化按钮
 
   const [experimentEnded, setExperimentEnded] = useState(false); // 新增：实验是否已完成
@@ -285,7 +286,10 @@ function App() {
       });
     };
 
+
+
     document.addEventListener('click', handleClick);
+    
 
     return () => {
       // window.webgazer.end();
@@ -301,6 +305,7 @@ function App() {
       window.__gazeListenerAttached = false;
       isWebgazerInitialized.current = false;
       document.removeEventListener('click', handleClick);  // 移除点击事件监听器
+     
     };
   }, []);
 
@@ -521,7 +526,18 @@ function App() {
       setEchoMessage(true);// 数据异常标记
 
     } finally {
-      setIsEvolving(false); // 释放防抖锁
+       setIsEvolving(false); // 释放防抖锁
+      // 新增：设置15秒冷却时间
+      setEvolveCooldown(15);
+      const cooldownInterval = setInterval(() => {
+        setEvolveCooldown(prev => {
+          if (prev <= 1) {
+            clearInterval(cooldownInterval);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
     }
   };
 
@@ -560,10 +576,16 @@ function App() {
             {/*<button onClick={handleEvolve}>方案迭代 Evolve</button>*/}
             <button
                 onClick={handleEvolve}
-                disabled={isEvolving}  // 绑定防抖状态
+                disabled={isEvolving || evolveCooldown > 0}  // 冷却时禁用
             >
-              {isEvolving ? '运行中...' : '方案迭代'}
+              {isEvolving
+                  ? '运行中...'
+                  : evolveCooldown > 0
+                      ? `冷却中(${evolveCooldown}s)`
+                      : '方案迭代'
+              }
             </button>
+            
 
             {/* <button
           onClick={() => setIsModalOpen(true)}

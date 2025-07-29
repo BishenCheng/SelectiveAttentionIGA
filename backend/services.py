@@ -14,26 +14,29 @@ previous_elite_solutions = [] # 存储历史精英方案
 # 修改evolve_population函数，使其不使用attention_rank，且不分离选中和未选中的索引
 def evolve_population(gaze_records, selected_indices,current_population):
     from IGA import crossover, mutation,sigmoid_selection
-    from Gaze_Graph import build_graph
+    from Gaze_Graph import build_graph,hub_rank
     global new_population, previous_elite_solutions
 
     # 0.1 构造图结构
-    G = build_graph(gaze_records)
+    G = build_graph(gaze_records)  # 构造字典结构
+    attention_scores = hub_rank(G,current_population, centrality_type = 'composite_eigenvector',delta= 0.5)
 
-    # 计算每个节点的度中心性作为评分依据
-    out_centrality = nx.out_degree_centrality(G)
-    in_centrality = nx.in_degree_centrality(G)
-    degree_centrality = {node: out_centrality[node] + in_centrality[node] for node in G.nodes}
+    # 分离选中和未选中的索引
+    unselected_indices = [i for i in range(len(current_population)) if i not in selected_indices]
 
-    # 不再分离选中和未选中的索引，所有方案一起进行评估
-    sorted_indices = sorted(range(len(current_population)), key=lambda idx: degree_centrality.get(idx, 0.0), reverse=True)
+    # 按 attention_scores 对选中和未选中的索引进行排序
+    sorted_selected_indices = sorted(selected_indices, key=lambda idx: attention_scores.get(idx, 0.0), reverse=True)
+    sorted_unselected_indices = sorted(unselected_indices, key=lambda idx: attention_scores.get(idx, 0.0), reverse=True)
+
+    # 合并排序后的索引
+    sorted_indices = sorted_selected_indices + sorted_unselected_indices
 
     # 根据排序后的索引重新排列种群
     sorted_population = [current_population[i] for i in sorted_indices]
 
     # 0.2 在degree_centrality的基础上定义评分函数
     def fitness_func(ga_instance, solution, solution_idx):
-        return degree_centrality.get(sorted_indices[solution_idx], 0.0)
+        return attention_scores.get(sorted_indices[solution_idx], 0.0)
 
     # 0.3.生成符合要求的精英位置逻辑！=[1,4] ---
     def generate_valid_positions(num, total):
