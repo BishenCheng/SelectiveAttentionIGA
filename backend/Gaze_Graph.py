@@ -164,7 +164,7 @@ def hub_rank(G: nx.MultiDiGraph,
         return {}
 
     nodes = sorted(list(G.nodes()))
-    semantic_vectors = np.array(records['population'])
+
 
     # --- 步骤 1: 构建一个带多种预计算权重的简单有向图 H ---
     H = nx.DiGraph()
