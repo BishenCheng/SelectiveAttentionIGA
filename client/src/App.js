@@ -106,6 +106,7 @@ function App() {
     }
 
     try {
+
       // 整理最终选中状态到记录（最后一次选中）
       const finalRecords = gazeRecords.map(record => {
         const adjustedDuration = Math.max(record.duration_weight, 10);
@@ -498,7 +499,7 @@ function App() {
         setSvgImages(jpgUrls);
         setGazeRecords([]); // 清空注视记录
         prevContainerIndexRef.current = null; // 重置注视容器索引
-        
+
         setGazeTimes(Array(16).fill(0)); // 重置注视时间
         setCurrentPopulation(data.new_population);
         setElitePositions(data.elite_positions || []); // 保存精英位置
@@ -699,4 +700,5 @@ function App() {
 }
 
 export default App;
+
 

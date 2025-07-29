@@ -13,13 +13,13 @@ previous_elite_solutions = [] # 存储历史精英方案
 # 用户评分反馈 & 迭代新一代___目前采用的是一种混合精英选择方法___
 def evolve_population(gaze_records, selected_indices,current_population):
     from IGA import crossover, mutation,sigmoid_selection
-    from Gaze_Graph import attention_rank, build_graph
+    from Gaze_Graph import hub_rank, build_graph,minmax_scale
     global attention_scores,new_population, previous_elite_solutions
 
     # 0.1. 计算注意力分数
     # G = build_graph(gaze_records)
     G = build_graph(gaze_records)  # 构造字典结构
-    attention_scores = attention_rank(G,current_population,alpha_post=0.7, alpha_pre=0.7, beta_factor=1.0, max_iter=10, tol=1e-6)
+    attention_scores = hub_rank(G,current_population, centrality_type = 'duration_in_degree',delta= 0.5)
 
     # 分离选中和未选中的索引
     unselected_indices = [i for i in range(len(current_population)) if i not in selected_indices]
@@ -59,6 +59,12 @@ def evolve_population(gaze_records, selected_indices,current_population):
     num_elites = min(len(selected_indices), 3)
     elite_individuals = [sorted_population[i] for i in range(num_elites)]
 
+    # 调试：输出每个个体的适应度值
+    print("Individual Fitness Values:")
+    for idx, solution in enumerate(sorted_population):
+        fitness_value = fitness_func(None, solution, idx)
+        print(f"Individual {idx}: {fitness_value}")
+
     #  0.4. 设置GA主函数
     # 显式设置 crossover_probability 参数
     crossover_probability = 0.7
@@ -82,7 +88,7 @@ def evolve_population(gaze_records, selected_indices,current_population):
     ga_instance.run()
     new_population = ga_instance.population.tolist()
 
-    #                     return [], elite_positions
+    # return [], elite_positions
 
     # return new_population, elite_positions
     return new_population
