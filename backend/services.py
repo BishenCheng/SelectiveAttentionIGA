@@ -67,9 +67,9 @@ def evolve_population(gaze_records, selected_indices,current_population):
 
     #  0.4. 设置GA主函数
     # 显式设置 crossover_probability 参数
-    crossover_probability = 0.7
+    crossover_probability = 0.6
     # 显式设置 mutation_probability 参数
-    mutation_probability = 0.1
+    mutation_probability = 0.15
     ga_instance = pygad.GA(
         num_generations=1,
         num_parents_mating=8,
