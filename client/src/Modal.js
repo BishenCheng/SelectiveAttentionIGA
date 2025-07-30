@@ -17,7 +17,8 @@ class Modal extends React.Component {
     modalRoot.removeChild(this.el);
   }
 
-  render() {
+  // 渲染机制
+    render() {
     const { 
       isOpen, 
       onClose, 
@@ -40,18 +41,36 @@ class Modal extends React.Component {
       return typeof vasecode === 'string' ? `${vasecode.substring(0, 30)}...` : '在当前批次';
     };
 
-    // 合并当前代和历史方案
-    const allItems = [
-      ...Array.from({length: currentPopulation.length}, (_, idx) => idx)
-        .filter(index => selectedIndices.has(index))
-        .map(index => ({
+    // 合并当前代和历史方案，但保持固定位置
+    const allItems = [];
+    
+    // 添加当前代的方案
+    Array.from({length: currentPopulation.length}, (_, idx) => idx)
+      .filter(index => selectedIndices.has(index))
+      .forEach(index => {
+        allItems.push({
           ...currentPopulation[index],
           base64: currentImages.images[index],
           generation: currentImages.generation,
-          index
-        })),
-      ...historicalSelections.flatMap(record => record.selections)
-    ];
+          index,
+          type: 'current',
+          key: `current-${currentImages.generation}-${index}`
+        });
+      });
+
+    // 添加历史代的方案
+    historicalSelections.forEach(record => {
+      record.selections.forEach((selection, idx) => {
+        allItems.push({
+          ...selection,
+          type: 'historical',
+          recordGeneration: record.generation,
+          recordIndex: historicalSelections.findIndex(r => r.generation === record.generation),
+          itemIndex: idx,
+          key: `historical-${record.generation}-${idx}`
+        });
+      });
+    });
 
     return ReactDOM.createPortal(
       <div className="modal-overlay">
@@ -69,30 +88,30 @@ class Modal extends React.Component {
                 return null;
               }
               return (
-                <div key={`item-${index}`} className="modal-image-item">
+                <div key={item.key} className="modal-image-item">
                   <img 
                     src={item.base64} 
-                    alt={`方案-${item.generation}-${item.index || index}`}
+                    alt={`方案-${item.generation || item.recordGeneration}-${item.index || index}`}
                     className="modal-image"
                   />
                   {/* 新增批次号显示 */}
-                  <div className="generation-number">方案批次: {item.generation}</div>
+                  <div className="generation-number">方案批次: {item.generation || item.recordGeneration}</div>
                   <div className="vasecode">
                     {formatVaseCode(item.vasecode)}
                   </div>
                   <button 
                     className="delete-btn"
                     onClick={() => {
-                      if (item.generation === currentImages.generation) {
+                      if (item.type === 'current') {
+                        // 删除当前代的方案
                         const newSet = new Set(selectedIndices);
                         newSet.delete(item.index);
                         setSelectedIndices(newSet);
                       } else {
-                        const genIndex = historicalSelections.findIndex(record => record.generation === item.generation);
-                        const itemIndex = historicalSelections[genIndex].selections.findIndex(i => i.vasecode === item.vasecode);
-                        onDeleteHistoricalRecord(genIndex, itemIndex);
+                        // 删除历史代的方案
+                        onDeleteHistoricalRecord(item.recordIndex, item.itemIndex);
                       }
-                      onLogOperation(item.generation, item.vasecode, 'remove');
+                      onLogOperation(item.generation || item.recordGeneration, item.vasecode, 'remove');
                     }}
                   >x</button>
                 </div>

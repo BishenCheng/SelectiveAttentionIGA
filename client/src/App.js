@@ -5,6 +5,7 @@ import Modal from './Modal';
 
 function App() {
   const [svgImages, setSvgImages] = useState(Array(16).fill(null));
+  const [allGenerationsVaseCodes, setAllGenerationsVaseCodes] = useState([]); // 新增：存储每一代的 vase_code
   const [gazeTimes, setGazeTimes] = useState(Array(16).fill(0));
   const [selectedIndices, setSelectedIndices] = useState(new Set()); // 记录选中的容器索引
   const [gazeRecords, setGazeRecords] = useState([]); // 存储注视路径记录
@@ -29,6 +30,7 @@ function App() {
   const [currentlyTracking, setCurrentlyTracking] = useState(true); // 新增追踪状态
   const [operationLogs, setOperationLogs] = useState([]); // 新增：操作日志记录
   const [modalError, setModalError] = useState(''); // 弹窗超额度的提示状态
+  const [currentGeneration, setCurrentGeneration] = useState(1); // 添加当前弹窗中的代际状态
 
   const [historicalSelections, setHistoricalSelections] = useState([]); // 新增历史精英选择。
 
@@ -38,6 +40,27 @@ function App() {
   const [ratings, setRatings] = useState(Array(16).fill(1)); // 
   const [unratedWarning, setUnratedWarning] = useState(false); // 未完成评分警告状态
 
+  //弹窗记录log
+  const logOperation = (generation, vasecode, operation) => {
+    setOperationLogs(prev => {
+      // 如果是remove操作，检查是否已经存在相同记录
+      if (operation === 'remove') {
+        const exists = prev.some(log => 
+          log.generation === generation && 
+          JSON.stringify(log.vasecode) === JSON.stringify(vasecode) && 
+          log.operation === 'remove'
+        );
+        if (exists) return prev; // 如果已存在，不重复记录
+      }
+      
+      return [...prev, {
+        timestamp: new Date().toISOString(),
+        generation,
+        vasecode,
+        operation
+      }];
+      });
+  };
 
   // 新增 handleRatingChange 函数
   const handleRatingChange = (index, value) => {
@@ -48,7 +71,10 @@ function App() {
 
   // 检查评分完成度函数
   const checkRatingCompletion = () => {
-    return ratings.every(rating => rating > 0);
+     // 统计评分大于 0 的数量
+    const completedRatingsCount = ratings.filter(rating => rating > 0).length;
+    // 判断完成评分的数量是否大于等于 10
+    return completedRatingsCount >= 10;
   };
 
   // 使用 useCallback 缓存弹窗-眼动仪控制函数，确保依赖更新时获取最新状态
@@ -99,7 +125,7 @@ function App() {
 
 
   // 整个实验终止设置
-   const handleEnd = async () => {
+  const handleEnd = async () => {
     // 计算当前批次选中的方案数量
     const currentSelectedCount = selectedIndices.size;
     // 计算历史方案的总数
@@ -107,7 +133,7 @@ function App() {
       (sum, record) => sum + record.selections.length, 
       0
     );
-     // 计算方案池中的方案总数量
+    // 计算方案池中的方案总数量
     const totalSchemes = currentSelectedCount + historicalCount;
 
     if (totalSchemes < 6) {
@@ -120,6 +146,17 @@ function App() {
     }
 
     try {
+      // ---------------- 新增：添加当前选中方案到操作日志 ----------------
+      const currentGen = historicalSelections.length + 1;
+      const addLogs = Array.from(selectedIndices).map(index => ({
+        timestamp: new Date().toISOString(),
+        generation: currentGen,
+        vasecode: currentPopulation[index],
+        operation: 'add'
+      }));
+      setOperationLogs(prev => [...prev, ...addLogs]); 
+      // -------------------------------------------------------------------
+
       // 整理最终选中状态到记录（最后一次选中）
       const finalRecords = gazeRecords.map(record => {
         const adjustedDuration = Math.max(record.duration_weight, 10);
@@ -166,9 +203,9 @@ function App() {
       console.log('终止响应数据:', data);
       console.log('偏好方案数：',totalSchemes)
       setExperimentEnded(true); // 标记实验结束
-       // 清空图片内容
+      // 清空图片内容
       setSvgImages([]); 
-      
+
     } catch (error) {
       console.error('终止失败:', error);
     }
@@ -323,36 +360,30 @@ function App() {
 
 
 
-  // 用户选择（不是评分）行为的函数
+  // 用户选择容器（不是评分）行为的函数
   const handleContainerClick = (index) => {
-
-    // 使用函数式更新确保获取最新状态
     setSelectedIndices(prev => {
-      const newSelected = new Set(prev); // 基于最新状态创建新Set
-      // if (newSelected.has(index)) {
-      //   newSelected.delete(index);
-      // } else {
-      //   newSelected.add(index);
-      // }
+      const newSelected = new Set(prev);
       const isAdding = !newSelected.has(index);
-      const currentGeneration = historicalSelections.length + 1; // 当前代数
-
-      // 如果选中数量超过3个，则移除最早选中的项
-       if (isAdding && newSelected.size >= 3) {
-        const firstIndex = [...newSelected][0];
-        newSelected.delete(firstIndex);
-
+      
+      if (isAdding) {
+        newSelected.add(index);
+        // 移除选择时的日志记录
+        // logOperation(currentGeneration, currentPopulation[index], 'add');
+        
+        if (newSelected.size > 3) {
+          const firstIndex = [...newSelected][0];
+          newSelected.delete(firstIndex);
+          // 移除选择时的日志记录
+          // logOperation(currentGeneration, currentPopulation[firstIndex], 'remove');
+        }
+      } else {
+        newSelected.delete(index);
+        // 移除选择时的日志记录
+        // logOperation(currentGeneration, currentPopulation[index], 'remove');
       }
-
-        // 更新当前操作
-    if (isAdding) {
-      newSelected.add(index);
-    } else {
-      newSelected.delete(index);
-    }
-
-    
-    return newSelected; // 返回新的Set实例触发重渲染
+      
+      return newSelected;
     });
   };
 
@@ -398,6 +429,7 @@ function App() {
         setSvgImages(jpgUrls);
         setCurrentPopulation(data.population);
         setRatings(Array(16).fill(0));//初始化评分为0
+        setCurrentGeneration(1); // 初始化时重置为第一代
       } else {
         console.error('响应数据中缺少必要字段');
       }
@@ -435,94 +467,94 @@ function App() {
     setIsEvolving(true); // 开启防抖锁
 
     // ---------------- 新增：提前保存当前代历史记录 ----------------
-  const currentGeneration = historicalSelections.length + 1;
-  // 使用当前代的图片地址（svgImages）和种群数据（currentPopulation）
-  const selectedItems = Array.from(selectedIndices).map(index => ({
-    vasecode: currentPopulation[index], 
-    base64: svgImages[index],  // 改为使用当前代图片地址
-    generation: currentGeneration,
-    index: index,
-  }));
+    const newGeneration = currentGeneration;  // 使用状态变量currentGeneration
+    // 使用当前代的图片地址（svgImages）和种群数据（currentPopulation）
+    const selectedItems = limitedSelectedIndices.map(index => ({  // 使用limitedSelectedIndices
+      vasecode: currentPopulation[index], 
+      base64: svgImages[index],  
+      generation: newGeneration,  // 使用状态变量currentGeneration
+      index: index,
+    }));
 
-  // 生成add操作日志（使用当前代数据）
-  const addLogs = Array.from(selectedIndices).map(index => ({
-    timestamp: new Date().toISOString(),
-    generation: currentGeneration,
-    vasecode: currentPopulation[index],
-    operation: 'add'
-  }));
+    // 生成add操作日志（使用限制后的索引）
+    const addLogs = limitedSelectedIndices.map(index => ({  // 使用limitedSelectedIndices
+      timestamp: new Date().toISOString(),
+      generation: newGeneration,  // 使用状态变量currentGeneration
+      vasecode: currentPopulation[index],
+      operation: 'add'
+    }));
 
-  // 提前更新历史记录和操作日志
-  setHistoricalSelections(prev => [...prev, {
-    generation: currentGeneration,
-    selections: selectedItems
-  }]);
-  setOperationLogs(prev => [...prev, ...addLogs]); 
-  console.log('保存的当前代历史记录:', selectedItems); 
-  // -----------------------------------------------------------
-    
-  try {
-      // 整理最终选中状态到记录（最后一次选中）
-      const finalRecords = gazeRecords.map(record => {
-        const adjustedDuration = Math.max(record.duration_weight, 10);
-        return {
-          ...record,
-          duration_weight: adjustedDuration
-        };
-      });
-
-      const response = await fetch('http://localhost:8000/evolve/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          population: currentPopulation,
-          gaze_records: finalRecords, // 传递注视记录
-          selected_indices: Array.from(selectedIndices), // 传递选中索引
-          ratings: ratings.map(r => r || 0) // 默认0防止undefined
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(`迭代请求失败，状态码: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log('迭代响应数据:', data);
+    // 提前更新历史记录和操作日志
+    setHistoricalSelections(prev => [...prev, {
+      generation: currentGeneration,  // 使用状态变量currentGeneration
+      selections: selectedItems
+    }]);
+    setOperationLogs(prev => [...prev, ...addLogs]); 
+    //console.log('保存的当前代历史记录:', selectedItems); 
+    // -----------------------------------------------------------
       
-      if (data.new_jpg && data.new_population) {
-        const jpgUrls = data.new_jpg.map(base64Jpg => `data:image/png;base64,${base64Jpg}`);
+    try {
+        // 整理最终选中状态到记录（最后一次选中）
+        const finalRecords = gazeRecords.map(record => {
+          const adjustedDuration = Math.max(record.duration_weight, 10);
+          return {
+            ...record,
+            duration_weight: adjustedDuration
+          };
+        });
+
+        const response = await fetch('http://localhost:8000/evolve/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            population: currentPopulation,
+            gaze_records: finalRecords, // 传递注视记录
+            selected_indices: Array.from(selectedIndices), // 传递选中索引
+            ratings: ratings.map(r => r || 0) // 默认0防止undefined
+          }),
+        });
+        if (!response.ok) {
+          throw new Error(`迭代请求失败，状态码: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('迭代响应数据:', data);
         
-       
+        if (data.new_jpg && data.new_population) {
+          const jpgUrls = data.new_jpg.map(base64Jpg => `data:image/png;base64,${base64Jpg}`);
+          
+        
 
-        setSvgImages(jpgUrls);
-        setGazeRecords([]); // 清空注视记录
-        prevContainerIndexRef.current = null; // 重置注视容器索引
-        setRatings(Array(16).fill(0));//归0
-        setGazeTimes(Array(16).fill(0)); // 重置注视时间
-        setCurrentPopulation(data.new_population);
-        setElitePositions(data.elite_positions || []); // 保存精英位置
-        setSelectedIndices(new Set()); // 清空选中项
+          setSvgImages(jpgUrls);
+          setGazeRecords([]); // 清空注视记录
+          prevContainerIndexRef.current = null; // 重置注视容器索引
+          setRatings(Array(16).fill(0));//归0
+          setGazeTimes(Array(16).fill(0)); // 重置注视时间
+          setCurrentPopulation(data.new_population);
+          setElitePositions(data.elite_positions || []); // 保存精英位置
+          setSelectedIndices(new Set()); // 清空选中项
+          setCurrentGeneration(prev => prev + 1); // 迭代时增加代际编号
+          setExperimentEnded(false); // 实验未结束
+          setEchoMessage(false); // 无需提示
 
-        setExperimentEnded(false); // 实验未结束
-        setEchoMessage(false); // 无需提示
+          //自动弹出一次
+          handleOpenModal();
 
-        //自动弹出一次
-        handleOpenModal();
+        } else {
+          console.error('响应数据中缺少必要字段');
+          setExperimentEnded(true); // 数据异常也标记为结束
+          // setEchoMessage(true);// 数据异常标记
+        }
+      } catch (error) {
+        console.error('迭代失败:', error);
+        //setExperimentEnded(true); // 出错时也标记为结束
+        setEchoMessage(true);// 数据异常标记
 
-      } else {
-        console.error('响应数据中缺少必要字段');
-        setExperimentEnded(true); // 数据异常也标记为结束
-        // setEchoMessage(true);// 数据异常标记
+      } finally {
+        setIsEvolving(false); // 释放防抖锁
       }
-    } catch (error) {
-      console.error('迭代失败:', error);
-      //setExperimentEnded(true); // 出错时也标记为结束
-      setEchoMessage(true);// 数据异常标记
-
-    } finally {
-      setIsEvolving(false); // 释放防抖锁
-    }
-  };
+    };
 
   return (
     <div className="app-container">
@@ -540,7 +572,7 @@ function App() {
       {/* 未完成评分警告 */}
         {unratedWarning && (
           <div className="unrated-warning">
-            <h2>请完成所有方案的评分后再进行迭代</h2>
+            <h2>请完成10个以上的评分后再进行迭代</h2>
           </div>
         )}
 
@@ -640,7 +672,7 @@ function App() {
                 currentImages={{
                 images: svgImages,
                 selectedIndices,
-                generation: historicalSelections.length + 1
+                generation: currentGeneration
               }}
               currentPopulation={currentPopulation} // 新增传递当前种群
               selectedIndices={selectedIndices} // 新增传递选中索引
@@ -648,27 +680,27 @@ function App() {
               setSelectedIndices={setSelectedIndices}
               
               // 新增：添加删除历史的方案记录的方法
-              onDeleteHistoricalRecord={(generationIndex, recordIndex) => {
+               onDeleteHistoricalRecord={(recordIndex, itemIndex) => {
+                const record = historicalSelections[recordIndex];
+                const deletedItem = record.selections[itemIndex];
+                
+                // 记录删除操作日志
+                logOperation(deletedItem.generation, deletedItem.vasecode, 'remove');
+                
+                // 创建新的历史记录数组
                 const newHistorical = [...historicalSelections];
-                newHistorical[generationIndex].selections.splice(recordIndex, 1);
-                if (newHistorical[generationIndex].selections.length === 0) {
-                  newHistorical.splice(generationIndex, 1);
+                newHistorical[recordIndex].selections.splice(itemIndex, 1);
+                
+                // 如果该代记录为空，则移除整个记录
+                if (newHistorical[recordIndex].selections.length === 0) {
+                  newHistorical.splice(recordIndex, 1);
                 }
+                
                 setHistoricalSelections(newHistorical);
               }}
 
               //行为记录部分
-              onLogOperation={(generation, vasecode, operation) => {
-                setOperationLogs(prev => [
-                  ...prev,
-                  {
-                    timestamp: new Date().toISOString(),
-                    generation,
-                    vasecode,
-                    operation
-                  }
-                ]);
-              }}
+              onLogOperation={logOperation}
             />
 
             

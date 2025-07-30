@@ -44,7 +44,9 @@ def initialize_vase_code(num_genes=32, num_solutions=16):
 
     return vase_code
 
-
+# def initialize_vase_code(num_genes=32, num_solutions=16):
+#     vase_code = np.random.randint(0, 2, (16, 32))
+#     return vase_code 
 
 # # 适应度函数（旧方法：基于用户评分）
 # def fitness_func(user_scores):

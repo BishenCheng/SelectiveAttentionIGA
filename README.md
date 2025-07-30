@@ -8,6 +8,7 @@ cd D:\CBS_tryProject\realEvoDiff\EvoDiff\Scripts
 .\activate
 
 #  回到项目主目录(自己回)
+cd D:\EyeTrack_IED\A-Test\backend
 
 # 进入后端目录
 cd backend
@@ -24,3 +25,9 @@ npm start
 ```
 
 
+### 3. 前端调试
+```bash
+cd client
+npm start
+npm run build //记得修改index.html的文件路径，去掉开头的/符号。
+```
