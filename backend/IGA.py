@@ -1,5 +1,5 @@
 import numpy as np
-from pyDOE import lhs
+# from pyDOE import lhs
 
 
 # 融合设计知识的初始化（4维拉丁超立方采样）

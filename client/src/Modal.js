@@ -76,9 +76,9 @@ class Modal extends React.Component {
             <div className="modal-overlay">
                 <div className="modal-content">
                     <button className="close-btn" onClick={onClose}>×</button>
-                    <h1>方案池</h1>
+                    <h1> Solutions Pool  </h1>
                     {modalError && <p className="modal-error" style={{ color: 'red', margin: '10px 0' }}>{modalError}</p>}
-                    <p>点击方案的右上角x图标可以删除该方案，点击右上角退出方案池</p>
+                    <p>Click the x icon in the top right corner of the scheme to delete the soulution, and click the top right corner to exit the Solutions Pool</p>
 
                     {/* 统一显示所有方案 */}
                     <div className="all-modal-images">
@@ -95,7 +95,7 @@ class Modal extends React.Component {
                                         className="modal-image"
                                     />
                                     {/* 新增批次号显示 */}
-                                    <div className="generation-number">方案批次: {item.generation || item.recordGeneration}</div>
+                                    <div className="generation-number">Generation: {item.generation || item.recordGeneration}</div>
                                     <div className="vasecode">
                                         {formatVaseCode(item.vasecode)}
                                     </div>

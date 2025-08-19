@@ -1,0 +1,1842 @@
+{
+  "population": [
+    [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0
+    ]
+  ],
+  "gaze_records": [
+    {
+      "timestamp": "2025-07-31T07:40:20.034Z",
+      "source_container": 8,
+      "target_container": 12,
+      "duration_weight": 71.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:21.716Z",
+      "source_container": 12,
+      "target_container": 8,
+      "duration_weight": 75.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:21.820Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:21.883Z",
+      "source_container": 9,
+      "target_container": 6,
+      "duration_weight": 66.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:22.025Z",
+      "source_container": 6,
+      "target_container": 1,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:22.114Z",
+      "source_container": 1,
+      "target_container": 0,
+      "duration_weight": 242.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:22.759Z",
+      "source_container": 0,
+      "target_container": 4,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:22.859Z",
+      "source_container": 4,
+      "target_container": 0,
+      "duration_weight": 33.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:22.892Z",
+      "source_container": 0,
+      "target_container": 1,
+      "duration_weight": 73.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:23.008Z",
+      "source_container": 1,
+      "target_container": 5,
+      "duration_weight": 62.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:23.174Z",
+      "source_container": 5,
+      "target_container": 6,
+      "duration_weight": 75.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:23.309Z",
+      "source_container": 6,
+      "target_container": 7,
+      "duration_weight": 64.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:23.512Z",
+      "source_container": 7,
+      "target_container": 11,
+      "duration_weight": 81.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:23.630Z",
+      "source_container": 11,
+      "target_container": 7,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:23.822Z",
+      "source_container": 7,
+      "target_container": 6,
+      "duration_weight": 93.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:24.151Z",
+      "source_container": 6,
+      "target_container": 1,
+      "duration_weight": 130.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:24.381Z",
+      "source_container": 1,
+      "target_container": 0,
+      "duration_weight": 301.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:24.714Z",
+      "source_container": 0,
+      "target_container": 4,
+      "duration_weight": 73.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:24.910Z",
+      "source_container": 4,
+      "target_container": 5,
+      "duration_weight": 63.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:24.973Z",
+      "source_container": 5,
+      "target_container": 9,
+      "duration_weight": 98.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:25.165Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 27.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:25.431Z",
+      "source_container": 10,
+      "target_container": 7,
+      "duration_weight": 39.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:25.780Z",
+      "source_container": 7,
+      "target_container": 11,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:25.850Z",
+      "source_container": 11,
+      "target_container": 10,
+      "duration_weight": 54.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:25.959Z",
+      "source_container": 10,
+      "target_container": 9,
+      "duration_weight": 171.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:26.253Z",
+      "source_container": 9,
+      "target_container": 12,
+      "duration_weight": 156.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:26.614Z",
+      "source_container": 12,
+      "target_container": 13,
+      "duration_weight": 58.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:26.710Z",
+      "source_container": 13,
+      "target_container": 10,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:26.740Z",
+      "source_container": 10,
+      "target_container": 6,
+      "duration_weight": 36.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:26.807Z",
+      "source_container": 6,
+      "target_container": 2,
+      "duration_weight": 28.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:26.835Z",
+      "source_container": 2,
+      "target_container": 3,
+      "duration_weight": 31.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:27.608Z",
+      "source_container": 3,
+      "target_container": 2,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:27.696Z",
+      "source_container": 2,
+      "target_container": 1,
+      "duration_weight": 270.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:28.039Z",
+      "source_container": 1,
+      "target_container": 4,
+      "duration_weight": 28.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:28.264Z",
+      "source_container": 4,
+      "target_container": 1,
+      "duration_weight": 32.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:28.296Z",
+      "source_container": 1,
+      "target_container": 2,
+      "duration_weight": 72.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:28.368Z",
+      "source_container": 2,
+      "target_container": 3,
+      "duration_weight": 166.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:28.872Z",
+      "source_container": 3,
+      "target_container": 2,
+      "duration_weight": 102.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:29.003Z",
+      "source_container": 2,
+      "target_container": 1,
+      "duration_weight": 61.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:29.241Z",
+      "source_container": 1,
+      "target_container": 4,
+      "duration_weight": 147.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:30.222Z",
+      "source_container": 4,
+      "target_container": 5,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:30.550Z",
+      "source_container": 5,
+      "target_container": 1,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:30.585Z",
+      "source_container": 1,
+      "target_container": 0,
+      "duration_weight": 477.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-31T07:40:31.150Z",
+      "source_container": 0,
+      "target_container": 5,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:31.187Z",
+      "source_container": 5,
+      "target_container": 2,
+      "duration_weight": 64.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:31.284Z",
+      "source_container": 2,
+      "target_container": 3,
+      "duration_weight": 92.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:31.680Z",
+      "source_container": 3,
+      "target_container": 2,
+      "duration_weight": 190.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:31.998Z",
+      "source_container": 2,
+      "target_container": 1,
+      "duration_weight": 157.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:32.155Z",
+      "source_container": 1,
+      "target_container": 2,
+      "duration_weight": 101.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:32.256Z",
+      "source_container": 2,
+      "target_container": 6,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:32.384Z",
+      "source_container": 6,
+      "target_container": 2,
+      "duration_weight": 125.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:33.089Z",
+      "source_container": 2,
+      "target_container": 1,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:33.190Z",
+      "source_container": 1,
+      "target_container": 0,
+      "duration_weight": 30.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:33.249Z",
+      "source_container": 0,
+      "target_container": 4,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:33.466Z",
+      "source_container": 4,
+      "target_container": 1,
+      "duration_weight": 74.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:33.540Z",
+      "source_container": 1,
+      "target_container": 2,
+      "duration_weight": 34.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:33.574Z",
+      "source_container": 2,
+      "target_container": 3,
+      "duration_weight": 63.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:33.987Z",
+      "source_container": 3,
+      "target_container": 7,
+      "duration_weight": 60.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:34.091Z",
+      "source_container": 7,
+      "target_container": 6,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:34.151Z",
+      "source_container": 6,
+      "target_container": 5,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:34.254Z",
+      "source_container": 5,
+      "target_container": 4,
+      "duration_weight": 195.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:34.480Z",
+      "source_container": 4,
+      "target_container": 0,
+      "duration_weight": 91.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:34.571Z",
+      "source_container": 0,
+      "target_container": 1,
+      "duration_weight": 34.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:34.634Z",
+      "source_container": 1,
+      "target_container": 5,
+      "duration_weight": 632.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:35.339Z",
+      "source_container": 5,
+      "target_container": 6,
+      "duration_weight": 225.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:35.564Z",
+      "source_container": 6,
+      "target_container": 7,
+      "duration_weight": 675.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-31T07:40:36.705Z",
+      "source_container": 7,
+      "target_container": 11,
+      "duration_weight": 31.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:37.215Z",
+      "source_container": 11,
+      "target_container": 7,
+      "duration_weight": 232.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:37.478Z",
+      "source_container": 7,
+      "target_container": 11,
+      "duration_weight": 49.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:37.559Z",
+      "source_container": 11,
+      "target_container": 10,
+      "duration_weight": 207.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:37.801Z",
+      "source_container": 10,
+      "target_container": 9,
+      "duration_weight": 715.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:38.549Z",
+      "source_container": 9,
+      "target_container": 5,
+      "duration_weight": 75.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:38.653Z",
+      "source_container": 5,
+      "target_container": 4,
+      "duration_weight": 131.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:38.824Z",
+      "source_container": 4,
+      "target_container": 5,
+      "duration_weight": 93.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:38.991Z",
+      "source_container": 5,
+      "target_container": 9,
+      "duration_weight": 39.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:39.123Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 226.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:39.349Z",
+      "source_container": 10,
+      "target_container": 11,
+      "duration_weight": 30.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:40.057Z",
+      "source_container": 11,
+      "target_container": 7,
+      "duration_weight": 29.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:40.346Z",
+      "source_container": 7,
+      "target_container": 6,
+      "duration_weight": 62.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:40.470Z",
+      "source_container": 6,
+      "target_container": 2,
+      "duration_weight": 29.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:40.558Z",
+      "source_container": 2,
+      "target_container": 1,
+      "duration_weight": 75.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:41.258Z",
+      "source_container": 1,
+      "target_container": 2,
+      "duration_weight": 349.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:41.700Z",
+      "source_container": 2,
+      "target_container": 3,
+      "duration_weight": 134.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:42.132Z",
+      "source_container": 3,
+      "target_container": 2,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:42.205Z",
+      "source_container": 2,
+      "target_container": 1,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:42.335Z",
+      "source_container": 1,
+      "target_container": 0,
+      "duration_weight": 103.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:42.498Z",
+      "source_container": 0,
+      "target_container": 4,
+      "duration_weight": 144.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:42.699Z",
+      "source_container": 4,
+      "target_container": 1,
+      "duration_weight": 133.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:42.862Z",
+      "source_container": 1,
+      "target_container": 2,
+      "duration_weight": 113.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:43.042Z",
+      "source_container": 2,
+      "target_container": 11,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:43.206Z",
+      "source_container": 11,
+      "target_container": 7,
+      "duration_weight": 30.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:43.264Z",
+      "source_container": 7,
+      "target_container": 6,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:43.383Z",
+      "source_container": 6,
+      "target_container": 5,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:43.603Z",
+      "source_container": 5,
+      "target_container": 4,
+      "duration_weight": 129.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:43.732Z",
+      "source_container": 4,
+      "target_container": 5,
+      "duration_weight": 94.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:43.855Z",
+      "source_container": 5,
+      "target_container": 6,
+      "duration_weight": 343.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:44.298Z",
+      "source_container": 6,
+      "target_container": 7,
+      "duration_weight": 233.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:44.758Z",
+      "source_container": 7,
+      "target_container": 6,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:44.813Z",
+      "source_container": 6,
+      "target_container": 5,
+      "duration_weight": 149.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:45.130Z",
+      "source_container": 5,
+      "target_container": 6,
+      "duration_weight": 67.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:45.197Z",
+      "source_container": 6,
+      "target_container": 7,
+      "duration_weight": 197.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:46.183Z",
+      "source_container": 7,
+      "target_container": 6,
+      "duration_weight": 458.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:46.727Z",
+      "source_container": 6,
+      "target_container": 10,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:46.834Z",
+      "source_container": 10,
+      "target_container": 9,
+      "duration_weight": 331.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:47.196Z",
+      "source_container": 9,
+      "target_container": 5,
+      "duration_weight": 444.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:47.752Z",
+      "source_container": 5,
+      "target_container": 8,
+      "duration_weight": 107.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:48.114Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 62.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:48.314Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 66.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:48.448Z",
+      "source_container": 10,
+      "target_container": 11,
+      "duration_weight": 110.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:49.240Z",
+      "source_container": 11,
+      "target_container": 10,
+      "duration_weight": 383.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:49.690Z",
+      "source_container": 10,
+      "target_container": 7,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:50.022Z",
+      "source_container": 7,
+      "target_container": 6,
+      "duration_weight": 101.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:50.154Z",
+      "source_container": 6,
+      "target_container": 5,
+      "duration_weight": 232.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:50.416Z",
+      "source_container": 5,
+      "target_container": 9,
+      "duration_weight": 228.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:50.644Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 180.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:50.963Z",
+      "source_container": 10,
+      "target_container": 7,
+      "duration_weight": 43.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:51.197Z",
+      "source_container": 7,
+      "target_container": 6,
+      "duration_weight": 311.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:51.537Z",
+      "source_container": 6,
+      "target_container": 5,
+      "duration_weight": 29.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:51.671Z",
+      "source_container": 5,
+      "target_container": 8,
+      "duration_weight": 495.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:52.166Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 467.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:52.633Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 447.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:53.080Z",
+      "source_container": 10,
+      "target_container": 11,
+      "duration_weight": 562.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:53.887Z",
+      "source_container": 11,
+      "target_container": 10,
+      "duration_weight": 93.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:53.980Z",
+      "source_container": 10,
+      "target_container": 11,
+      "duration_weight": 560.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:54.573Z",
+      "source_container": 11,
+      "target_container": 6,
+      "duration_weight": 98.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:54.712Z",
+      "source_container": 6,
+      "target_container": 1,
+      "duration_weight": 486.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:55.198Z",
+      "source_container": 1,
+      "target_container": 2,
+      "duration_weight": 145.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:55.343Z",
+      "source_container": 2,
+      "target_container": 3,
+      "duration_weight": 224.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:55.567Z",
+      "source_container": 3,
+      "target_container": 7,
+      "duration_weight": 29.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:55.596Z",
+      "source_container": 7,
+      "target_container": 11,
+      "duration_weight": 73.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:55.701Z",
+      "source_container": 11,
+      "target_container": 6,
+      "duration_weight": 104.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:55.833Z",
+      "source_container": 6,
+      "target_container": 2,
+      "duration_weight": 74.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:55.907Z",
+      "source_container": 2,
+      "target_container": 3,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:56.064Z",
+      "source_container": 3,
+      "target_container": 2,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:56.135Z",
+      "source_container": 2,
+      "target_container": 1,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:56.193Z",
+      "source_container": 1,
+      "target_container": 0,
+      "duration_weight": 77.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:56.331Z",
+      "source_container": 0,
+      "target_container": 4,
+      "duration_weight": 92.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:56.490Z",
+      "source_container": 4,
+      "target_container": 9,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:56.653Z",
+      "source_container": 9,
+      "target_container": 8,
+      "duration_weight": 60.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:56.785Z",
+      "source_container": 8,
+      "target_container": 4,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:57.412Z",
+      "source_container": 4,
+      "target_container": 0,
+      "duration_weight": 699.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:58.492Z",
+      "source_container": 0,
+      "target_container": 5,
+      "duration_weight": 32.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:58.524Z",
+      "source_container": 5,
+      "target_container": 6,
+      "duration_weight": 29.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:58.553Z",
+      "source_container": 6,
+      "target_container": 7,
+      "duration_weight": 55.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:59.071Z",
+      "source_container": 7,
+      "target_container": 11,
+      "duration_weight": 10.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-31T07:40:59.298Z",
+      "source_container": 11,
+      "target_container": 10,
+      "duration_weight": 104.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:59.437Z",
+      "source_container": 10,
+      "target_container": 5,
+      "duration_weight": 29.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:59.493Z",
+      "source_container": 5,
+      "target_container": 9,
+      "duration_weight": 49.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:59.542Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 184.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:59.758Z",
+      "source_container": 10,
+      "target_container": 11,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:40:59.823Z",
+      "source_container": 11,
+      "target_container": 10,
+      "duration_weight": 30.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:00.219Z",
+      "source_container": 10,
+      "target_container": 9,
+      "duration_weight": 214.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:00.433Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 34.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:00.570Z",
+      "source_container": 10,
+      "target_container": 9,
+      "duration_weight": 62.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:00.632Z",
+      "source_container": 9,
+      "target_container": 10,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:00.663Z",
+      "source_container": 10,
+      "target_container": 9,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:00.731Z",
+      "source_container": 9,
+      "target_container": 8,
+      "duration_weight": 67.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:00.798Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 102.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:01.001Z",
+      "source_container": 9,
+      "target_container": 12,
+      "duration_weight": 30.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:02.500Z",
+      "source_container": 12,
+      "target_container": 8,
+      "duration_weight": 62.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:02.803Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 62.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:02.966Z",
+      "source_container": 9,
+      "target_container": 8,
+      "duration_weight": 36.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:03.002Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:03.034Z",
+      "source_container": 9,
+      "target_container": 8,
+      "duration_weight": 32.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:03.066Z",
+      "source_container": 8,
+      "target_container": 9,
+      "duration_weight": 142.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:03.297Z",
+      "source_container": 9,
+      "target_container": 13,
+      "duration_weight": 49.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:03.497Z",
+      "source_container": 13,
+      "target_container": 8,
+      "duration_weight": 102.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:03.644Z",
+      "source_container": 8,
+      "target_container": 13,
+      "duration_weight": 202.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:03.976Z",
+      "source_container": 13,
+      "target_container": 9,
+      "duration_weight": 191.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:04.200Z",
+      "source_container": 9,
+      "target_container": 6,
+      "duration_weight": 43.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:04.243Z",
+      "source_container": 6,
+      "target_container": 7,
+      "duration_weight": 62.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:04.998Z",
+      "source_container": 7,
+      "target_container": 10,
+      "duration_weight": 178.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:05.176Z",
+      "source_container": 10,
+      "target_container": 11,
+      "duration_weight": 160.0,
+      "is_selected": true
+    },
+    {
+      "timestamp": "2025-07-31T07:41:05.675Z",
+      "source_container": 11,
+      "target_container": 10,
+      "duration_weight": 163.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:05.874Z",
+      "source_container": 10,
+      "target_container": 5,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:05.967Z",
+      "source_container": 5,
+      "target_container": 4,
+      "duration_weight": 166.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:07.350Z",
+      "source_container": 4,
+      "target_container": 5,
+      "duration_weight": 68.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:07.418Z",
+      "source_container": 5,
+      "target_container": 6,
+      "duration_weight": 72.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:07.521Z",
+      "source_container": 6,
+      "target_container": 2,
+      "duration_weight": 41.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:07.658Z",
+      "source_container": 2,
+      "target_container": 3,
+      "duration_weight": 30.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:07.719Z",
+      "source_container": 3,
+      "target_container": 2,
+      "duration_weight": 31.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:07.782Z",
+      "source_container": 2,
+      "target_container": 6,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:07.888Z",
+      "source_container": 6,
+      "target_container": 5,
+      "duration_weight": 10.0,
+      "is_selected": false
+    },
+    {
+      "timestamp": "2025-07-31T07:41:07.949Z",
+      "source_container": 5,
+      "target_container": 4,
+      "duration_weight": 10.0,
+      "is_selected": false
+    }
+  ],
+  "selected_indices": [
+    0,
+    7
+  ]
+}

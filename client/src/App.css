@@ -6,9 +6,22 @@ body, html {
 }
 
 /* 新增：确保WebGazer的canvas可见 */
+/* #webgazerVideoContainer,
+#webgazerPredictorVisuals {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 9999 !important;
+  pointer-events: none !important;
+} */
+ 
 #webgazerVideoContainer,
 #webgazerPredictorVisuals {
   position: fixed !important;
+  display: none !important;
+  visibility: hidden !important;
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
@@ -157,7 +170,7 @@ box-shadow: 0 0 8px rgba(136, 136, 136, 0.3); 红色阴影 */
 } */
 
 button {
-  margin-top: auto;
+  /*margin-top: auto;*/
   margin-bottom: 20px;
   padding: 10px 20px;
   font-size: 24px;
@@ -165,32 +178,40 @@ button {
   cursor: pointer;
   flex-direction: column;
   gap: 15px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 42px;
+  margin-top: 20px;
 }
 
 .start-button {
-  margin-top: auto;
+  /*margin-top: auto;*/
   margin-bottom: 20px;
   padding: 10px 20px;
   font-size: 24px;
   display: flex;
   cursor: pointer;
   flex-direction: column;
-  gap: 15px;
-  position: relative; /* 添加相对定位 */
-  bottom: 120px; /* 向上移动 120px */
+  gap: 5px;
+  /*position: relative; /* 添加相对定位 */
+  /*bottom: 120px; /* 向上移动 120px */
 }
 
 .end-button {
-  margin-top: auto;
+ /* margin-top: auto;*/
   margin-bottom: 20px;
   padding: 10px 20px;
   font-size: 24px;
   display: flex;
   cursor: pointer;
   flex-direction: column;
-  gap: 15px;
-  position: relative; /* 添加相对定位 */
-  top: 35px; /* 向下移动 35px */
+  gap: 5px;
+ /*position: relative; /* 添加相对定位 */
+  /*top: 35px; /* 向下移动 35px */
 }
 
 .calibration-container {
