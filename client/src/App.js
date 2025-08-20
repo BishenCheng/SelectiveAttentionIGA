@@ -559,7 +559,7 @@ function App() {
   return (
     <div className="app-container">
       <div className="sidebar">
-      <h1>智能设计实验平台</h1>
+      <h2>Vase Design Platform</h2>
       {webgazerError && <p className="error-message">**Error:** {webgazerError}</p>}
 
       {/* 实验结束提示 */}
@@ -590,19 +590,33 @@ function App() {
       
       <div className="control-buttons">
 
-        <button className="start-button" 
-            onClick={handleInitialize}
-            disabled={initializeClickCount >= 2 || isInitializing} // 点击两次后禁用按钮
-        >
-          {isEvolving ? '运行中...' : '实验开始'}
-        </button>
+        <div className="button-row">
+
+          <button className="start-button" 
+              onClick={handleInitialize}
+              disabled={initializeClickCount >= 2 || isInitializing} // 点击两次后禁用按钮
+          >
+            {isEvolving ? '运行中...' : 'Start'}
+          
+          </button>
+
+                    <button className="end-button" 
+            onClick={() => {
+              handleEnd();
+              
+            }}
+          >
+            End 
+          </button>
+
+        </div>
       
         {/*<button onClick={handleEvolve}>方案迭代 Evolve</button>*/}
         <button
           onClick={handleEvolve}
           disabled={isEvolving}  // 绑定防抖状态
         >
-          {isEvolving ? '运行中...' : '方案迭代'}
+          {isEvolving ? '运行中...' : 'Solution Iteration'}
         </button>
 
          {/* <button
@@ -621,18 +635,11 @@ function App() {
           //     setCurrentlyTracking(false)
           //  }}
           >
-          方案池
+          Solutions Pool
           </button>
 
         
-          <button className="end-button" 
-            onClick={() => {
-              handleEnd();
-              
-            }}
-          >
-            实验结束
-          </button>
+
     
       </div>
       </div>
