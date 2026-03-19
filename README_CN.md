@@ -2,8 +2,8 @@
 ## 1.后端启动
 
 ```bash  
-#  进入虚拟环境
-cd D:\CBS_tryProject\realEvoDiff\EvoDiff\Scripts
+#  请先运行requirement.txt，然后进入虚拟环境
+cd [Your Python venv]
 .\activate
 
 #  回到项目主目录
