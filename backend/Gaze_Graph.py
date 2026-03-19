@@ -116,6 +116,83 @@ def attention_rank(G, population,alpha_post=0.8, alpha_pre=0.7, beta_factor=1.0,
     C_mapped = {key: 1.0 + 9.0 * (value - C_min) / (C_max - C_min) for key, value in C.items()}
 
     return C_mapped
+# SA Centerality
+def a_rank_dual_alpha(G: nx.MultiDiGraph, 
+                        alpha_gaze: float = 0.1, 
+                        alpha_select: float = 0.75):
+    """
+    计算双Alpha中心性，区分“注视”和“选择”行为。
+
+    此模型为两种行为路径设置不同的影响力衰减系数，以更精确地建模认知过程。
+    - "注视"路径 (探索性): 使用较小的alpha_gaze，影响力衰减快。
+    - "选择"路径 (确定性): 使用较大的alpha_select，影响力衰减慢，路径依赖性强。
+
+    Args:
+        G (nx.MultiDiGraph): 包含注视行为的有向多重图。
+                               边属性应包含 'duration_weight' 和 'selected_indces' (bool)。
+        alpha_gaze (float, optional): "注视"行为路径的衰减系数。默认为 0.1。
+        alpha_select (float, optional): "选择"行为路径的衰减系数。默认为 0.85。
+
+    Returns:
+        dict: 一个字典，映射每个方案(节点ID)到其原始（未归一化）的重要性得分。
+    """
+    # --- 步骤 0: 初始化 ---
+    if not G.nodes():
+        return {}
+
+    nodes = sorted(list(G.nodes()))
+    n_nodes = len(nodes)
+    node_to_idx = {node: i for i, node in enumerate(nodes)}
+
+    # --- 步骤 1: 构建基础吸引力向量 e (基于入度) ---
+    in_degrees = np.array([G.in_degree(n) for n in nodes], dtype=float)
+    total_in_degree = np.sum(in_degrees)
+    if total_in_degree > 0:
+        e_vec = in_degrees / total_in_degree
+    else:
+        e_vec = np.ones(n_nodes) / n_nodes
+
+    # --- 步骤 2: 分别构建 "注视" 和 "选择" 的影响力矩阵 ---
+    A_gaze = np.zeros((n_nodes, n_nodes), dtype=float)
+    A_select = np.zeros((n_nodes, n_nodes), dtype=float)
+
+    for u, v, data in G.edges(data=True):
+        u_idx, v_idx = node_to_idx[u], node_to_idx[v]
+        duration = data.get('duration_weight', 0.0)
+        # 假设您的属性名为 'selected_indces'
+        is_selection = data.get('selected_indces', False)
+
+        if is_selection:
+            A_select[u_idx, v_idx] += duration
+        else:
+            A_gaze[u_idx, v_idx] += duration
+            
+    # --- 步骤 3: 分别对两个矩阵进行列归一化 ---
+    # 归一化 A_gaze
+    gaze_col_sums = A_gaze.sum(axis=0)
+    gaze_col_sums[gaze_col_sums == 0] = 1
+    A_gaze_norm = A_gaze / gaze_col_sums
+    
+    # 归一化 A_select
+    select_col_sums = A_select.sum(axis=0)
+    select_col_sums[select_col_sums == 0] = 1
+    A_select_norm = A_select / select_col_sums
+
+    # --- 步骤 4: 求解双Alpha线性方程 ---
+    # M = I - alpha_gaze * A_gaze.T - alpha_select * A_select.T
+    I = np.identity(n_nodes)
+    M = I - alpha_gaze * A_gaze_norm.T - alpha_select * A_select_norm.T
+
+    try:
+        scores_vec = np.linalg.solve(M, e_vec)
+    except np.linalg.LinAlgError:
+        print("警告: 双Alpha模型矩阵是奇异的。返回基础吸引力得分。")
+        scores_vec = e_vec
+
+    # --- 步骤 5: 格式化输出 ---
+    final_scores = {node: score for node, score in zip(nodes, scores_vec)}
+
+    return final_scores
 
 def minmax_scale(scores_array: np.ndarray) -> np.ndarray:
     """
@@ -273,6 +350,82 @@ def hub_rank(G: nx.MultiDiGraph,
 
     return final_scores
 
+# \alpha 中心性，节点的“基础吸引力”和“影响力传播”
+def a_rank(G: nx.MultiDiGraph, alpha: float = 0.85):
+    """
+    计算基于Alpha中心性的方案重要性得分。
+
+    该模型融合了节点的“基础吸引力”（由访问次数定义）和节点间的“影响力传播”（由注视时长定义）。
+    它实现了 x = (I - alpha * A_T)^-1 * e 的计算，其中：
+    - e: 基于节点入度（访问次数）的基础吸引力向量。
+    - A: 基于总注视时长的加权邻接矩阵，代表影响力传播路径。
+    - alpha: 影响力衰减系数，控制路径依赖的程度。
+
+    Args:
+        G (nx.MultiDiGraph): 包含注视行为的有向多重图。
+                               其边应有 'duration_weight' 属性。
+        alpha (float, optional): 影响力衰减系数，默认为 0.1。
+                                 一个较小的值会更侧重于节点自身的基础吸引力。
+
+    Returns:
+        dict: 一个字典，映射每个方案(节点ID)到其原始（未归一化）的重要性得分。
+    """
+    # --- 步骤 0: 初始化和健壮性检查 ---
+    if not G.nodes():
+        return {}
+
+    nodes = sorted(list(G.nodes()))
+    n_nodes = len(nodes)
+    node_to_idx = {node: i for i, node in enumerate(nodes)}
+
+    # --- 步骤 1: 构建基础吸引力向量 e (基于入度/访问次数) ---
+    degrees = np.array([G.degree(n) for n in nodes], dtype=float)
+
+    # 对 e 进行归一化，使其成为一个概率分布（和为1）
+    total_degree = np.sum(degrees)
+    if total_degree > 0:
+        e_vec = degrees / total_degree
+    else:
+        # 如果图中没有边，则所有节点吸引力均等
+        e_vec = np.ones(n_nodes) / n_nodes
+
+    # --- 步骤 2: 构建影响力传播矩阵 A (基于总注视时长) ---
+    # 使用numpy构建矩阵比networkx的中间图更高效
+    A = np.zeros((n_nodes, n_nodes), dtype=float)
+    for u, v, data in G.edges(data=True):
+        # 将u,v映射到矩阵索引
+        u_idx, v_idx = node_to_idx[u], node_to_idx[v]
+        duration = data.get('duration_weight', 0.0)
+        # 注意：邻接矩阵 A[i, j] 代表从 i 到 j 的边
+        A[u_idx, v_idx] += duration
+
+    # 对 A 进行列归一化，消除绝对时长带来的尺度偏差
+    # 这使得模型更稳健，alpha的作用更纯粹
+    col_sums = A.sum(axis=0)
+    # 防止除以零
+    col_sums[col_sums == 0] = 1
+    A_norm = A / col_sums
+
+    # --- 步骤 3: 求解 Alpha Centrality 线性方程 ---
+    # 我们要求解 (I - alpha * A_norm.T) * x = e
+    # 这是形如 M * x = b 的线性方程组
+    I = np.identity(n_nodes)
+    M = I - alpha * A_norm.T
+
+    try:
+        # 使用np.linalg.solve求解，比直接求逆更稳定、更高效
+        scores_vec = np.linalg.solve(M, e_vec)
+    except np.linalg.LinAlgError:
+        # 如果矩阵M是奇异的（通常在alpha设置不当或图结构特殊时发生）
+        # 返回一个基于基础吸引力的得分作为回退
+        print("警告: 矩阵是奇异的，无法求解Alpha Centrality。返回基础吸引力得分。")
+        scores_vec = e_vec
+
+    # --- 步骤 4: 格式化输出，不进行归一化 ---
+    # 将计算出的得分向量映射回节点ID
+    final_scores = {node: score for node, score in zip(nodes, scores_vec)}
+
+    return final_scores
 # 可视化
 def visualize_gaze_graph(G):
     """

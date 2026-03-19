@@ -36,7 +36,7 @@ body, html {
 }
 
 .sidebar {
-  width: 300px; /* 固定宽度 */
+  width: 250px; /* 固定宽度 */
   padding: 20px;
   background-color: #f8f8f8; /* 可选背景色 */
   border-left: 1px solid #ccc; /* 边界线 */
@@ -56,8 +56,9 @@ body, html {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4列布局 */
   /* 容器之间的间距 */
-  gap: 20px;
-  max-width: 1600px; /* 设置容器最大宽度 */
+  gap: 30px;
+  column-gap: 30px; /* 仅调整左右间距 */
+  max-width: 1800px; /* 设置容器最大宽度 */
   position: static;  /* 相对定位 */
   margin: 0 auto; /* 水平居中 */
   /* 容器内边距 */
@@ -225,15 +226,7 @@ button {
   width: 100%;
 }
 
-.images-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 保持4列布局 */
-  gap: 10px; /* 保持间距 */
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px;
-  box-sizing: border-box;
-}
+
 
 /* 新增统一容器样式 */
 .image-item-container {

@@ -14,12 +14,12 @@ previous_elite_solutions = [] # 存储历史精英方案
 # 修改evolve_population函数，使其不使用attention_rank，且不分离选中和未选中的索引
 def evolve_population(gaze_records, selected_indices,current_population):
     from IGA import crossover, mutation,sigmoid_selection
-    from Gaze_Graph import build_graph,hub_rank
+    from Gaze_Graph import build_graph,a_rank,a_rank_dual_alpha
     global new_population, previous_elite_solutions
 
     # 0.1 构造图结构
     G = build_graph(gaze_records)  # 构造字典结构
-    attention_scores = hub_rank(G,current_population, centrality_type = 'composite_eigenvector',delta= 0.5)
+    attention_scores = a_rank_dual_alpha(G, 0.1,0.75) # 计算两个行为对应的Alpha中心性
 
     # 分离选中和未选中的索引
     unselected_indices = [i for i in range(len(current_population)) if i not in selected_indices]

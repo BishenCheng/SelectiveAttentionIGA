@@ -431,6 +431,11 @@ function App() {
   };
 
   const handleEvolve = async () => {
+     // 优先检查：若未选择任何方案，直接终止迭代
+    if (selectedIndices.size === 0) {
+      setEchoMessage(true); // 显示"请选择1-3个方案"提示
+      return;
+    }
 
     // 调试信息
     console.log('--- 迭代开始前的数据 ---');
