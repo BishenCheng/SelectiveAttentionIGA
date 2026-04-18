@@ -109,7 +109,7 @@ uvicorn main:app --reload --host 127.0.0.1 --port 8001
 
 ---
 
-### Branch: SA-IGA (Port 8002)
+### Branch: Main branch (SA-IGA in my Paper) (Port 8002)
 
 ```bash
 # Frontend run under your main directory.
